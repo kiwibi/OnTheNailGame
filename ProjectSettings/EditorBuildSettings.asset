@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: efb09aac2b67fc84c9da49228feea2aa
   - enabled: 1
+    path: Assets/Scenes/Daniel Scene.unity
+    guid: d4f4b5d19e9440847bbb19e12c6921a7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
-    guid: 65b56d3650cbee14285214937480ce09
+    guid: f28a4bd76477c67439303aa4c85e4969
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: 8b1ca7f450d4b10478346a066e791c55
