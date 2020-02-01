@@ -5,7 +5,6 @@ using UnityEngine;
 public class RotateAround : MonoBehaviour
 {
     public GameObject OrbitPoint_;
-    public GameObject Anchor_;
     private Rigidbody2D HammerBody_;
 
     public float orbitDistance_;
@@ -19,13 +18,17 @@ public class RotateAround : MonoBehaviour
     [Tooltip("Force multiplier when releasing hammer")]
     public float forceMultiplier_;
     [Header("spin variables")]
-    [Tooltip("big number that decreases spin speed")]
+    [Tooltip("big number that decreases spin speed       multiplication used")]
     public float spinThrottle_;
-    [Tooltip("small number that decreses the spin throttle over time")]
+    [Tooltip("small number that decreses the spin throttle over time    division used")]
     public float spinSpeedDecrease_;
+    [Header("collision variables")]
+    [Tooltip("Amount of speed decresed by every collision   subtraction used")]
+    public float collisionSpeedDecrease_;
 
     private float orbit_; //radian degree toward the center object
     private float speedReset_;
+    private float throttleReset_;
     private Vector3 tempPos_;
     private Vector3 releaseDirection_;
     private float gravityScale_;
@@ -37,10 +40,13 @@ public class RotateAround : MonoBehaviour
         HammerBody_ = GetComponent<Rigidbody2D>();
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
+        orbit_ = 0;
         gravityScale_ = HammerBody_.gravityScale;
         HammerBody_.gravityScale = 0;
+        HammerBody_.angularVelocity = 0;
         swinging_ = true;
         startRotation_ = HammerBody_.transform.rotation;
+        throttleReset_ = spinThrottle_;
     }
 
     // Update is called once per frame
@@ -52,9 +58,6 @@ public class RotateAround : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
         {
-            swinging_ = true;
-            transform.position = new Vector3(Anchor_.transform.position.x + orbitDistance_, Anchor_.transform.position.y, Anchor_.transform.position.z);
-            
             resetSwing();
         }
     }
@@ -124,12 +127,14 @@ public class RotateAround : MonoBehaviour
 
     void resetSwing()
     {
+        swinging_ = true;
+        transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
         HammerBody_.velocity = Vector3.zero;
         HammerBody_.transform.rotation = startRotation_;
         HammerBody_.angularVelocity = 0;
         orbit_ = 0;
         orbitSpeed_ = speedReset_;
-
+        spinThrottle_ = throttleReset_;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
     }
 
@@ -166,5 +171,14 @@ public class RotateAround : MonoBehaviour
                 RotateSprite(true);
                 break;
         };
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log(orbitSpeed_);
+        if (orbitSpeed_ > 0)
+            orbitSpeed_ -= collisionSpeedDecrease_;
+        else
+            orbitSpeed_ = 0;
     }
 }
