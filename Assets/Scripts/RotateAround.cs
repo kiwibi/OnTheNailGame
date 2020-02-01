@@ -127,7 +127,12 @@ public class RotateAround : MonoBehaviour
         }
         else
         {
-            Anchor_.transform.Rotate(new Vector3(0, 0, 1), orbit_);
+            Vector3 dir = (OrbitPoint_.transform.position - HammerBody_.transform.position);
+            Vector3 up = new Vector3(0, 0, 1);
+            var rotation = Quaternion.LookRotation(dir, up);
+            rotation.x = 0;
+            rotation.y = 0;
+            transform.rotation = rotation;
         }
     }
 
