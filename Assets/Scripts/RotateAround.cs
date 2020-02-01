@@ -5,9 +5,7 @@ using UnityEngine;
 public class RotateAround : MonoBehaviour
 {
     public GameObject OrbitPoint_;
-    private GameObject HammerMan_;
     private Rigidbody2D HammerBody_;
-    public Transform parent_;
 
     public float orbitDistance_;
     [Header("Speed variables")]
@@ -26,8 +24,7 @@ public class RotateAround : MonoBehaviour
 
     void Start()
     {
-        HammerMan_ = GameObject.FindGameObjectWithTag("Player");
-        HammerBody_ = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        HammerBody_ = GetComponent<Rigidbody2D>();
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
     }
@@ -46,7 +43,6 @@ public class RotateAround : MonoBehaviour
             tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
             transform.position = tempPos_;
-            HammerMan_.transform.position = transform.position;
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
@@ -56,7 +52,6 @@ public class RotateAround : MonoBehaviour
             tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
             transform.position = tempPos_;
-            HammerMan_.transform.position = transform.position;
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
@@ -64,7 +59,7 @@ public class RotateAround : MonoBehaviour
         {
             resetSwing();
 
-            releaseDirection_ = calculateTan(parent_.position, HammerBody_.transform.position);
+            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             releaseDirection_ *= -1;
@@ -75,7 +70,7 @@ public class RotateAround : MonoBehaviour
         {
             resetSwing();
 
-            releaseDirection_ = calculateTan(parent_.position, HammerBody_.transform.position);
+            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_);
