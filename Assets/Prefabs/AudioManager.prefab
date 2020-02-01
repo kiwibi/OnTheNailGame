@@ -86,3 +86,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - Name: Goodjob
+    clip: {fileID: 8300000, guid: 4e99b60de3bdb1e4aa1f716146a5ba7e, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Button
+    clip: {fileID: 8300000, guid: 0ac3eba7d5246fc43aacd61ebcdda88e, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
