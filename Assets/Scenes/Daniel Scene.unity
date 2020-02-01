@@ -700,14 +700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c33466140fd11409a5a16799d046aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originX: 0
-  originY: 0
-  minObjX: -10
-  maxObjX: 10
-  minObjY: -5
-  maxObjY: 5
-  adjustmentX: 4
-  adjustmentY: 2
 --- !u!1001 &2042949323
 PrefabInstance:
   m_ObjectHideFlags: 0
