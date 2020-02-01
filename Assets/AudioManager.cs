@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -32,9 +33,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void Start()
     {
-        Play("Theme");
+        Scene currentS = SceneManager.GetActiveScene();
+        if(currentS.name != "Menu")
+        {
+           Play("Theme");
+        }
+        else
+        {
+            Play("MenuTheme");
+        }
+       
     }
 
     public void Play (string name)
