@@ -136,15 +136,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85bf80c38b2b77f4ea3a25b7c9ab80fb, type: 3}
---- !u!1 &1823898037473794915 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9121106727611042703, guid: 85bf80c38b2b77f4ea3a25b7c9ab80fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7483689160944308460}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8425998408663833380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1383818176934759368, guid: 85bf80c38b2b77f4ea3a25b7c9ab80fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7483689160944308460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5775082862534807127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4034751240084889275, guid: 85bf80c38b2b77f4ea3a25b7c9ab80fb,
     type: 3}
   m_PrefabInstance: {fileID: 7483689160944308460}
   m_PrefabAsset: {fileID: 0}
@@ -159,7 +159,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OrbitPoint_
       value: 
-      objectReference: {fileID: 1823898037473794915}
+      objectReference: {fileID: 5775082862534807127}
     - target: {fileID: 1232246253098333322, guid: 66e2b78f53afb77419bc4dc071b7e95e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c2941384112804d81396f3b5abbf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  objectA: {fileID: 0}
+  objectB: {fileID: 0}
 --- !u!114 &1232246253098333321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,11 +114,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OrbitPoint_: {fileID: 0}
-  orbitDistance_: 4
+  orbitDistance_: 0.7
   speedIncrease_: 0.15
   orbitSpeed_: 32
   orbitSpeedCap_: 300
-  forceMultiplier_: 16
+  forceMultiplier_: 6
+  spinThrottle_: 1000
+  spinSpeedDecrease_: 0.001
+  collisionSpeedDecrease_: 100
 --- !u!61 &9034913024563654777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +179,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.3
   m_AngularDrag: 0.02
-  m_GravityScale: 3
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 2
