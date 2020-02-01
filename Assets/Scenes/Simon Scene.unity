@@ -366,6 +366,11 @@ PrefabInstance:
       propertyPath: orbitSpeedCap_
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 1232246253098333321, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: forceMultiplier_
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1232246253098333322, guid: 66e2b78f53afb77419bc4dc071b7e95e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,6 +430,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122638107612496791, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: m_SleepingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66e2b78f53afb77419bc4dc071b7e95e, type: 3}

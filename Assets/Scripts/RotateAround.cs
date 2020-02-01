@@ -57,23 +57,26 @@ public class RotateAround : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
         {
-            resetSwing();
+            
 
             releaseDirection_ = calculateTan(OrbitPoint_.transform.position, transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             releaseDirection_ *= -1;
-            HammerBody_.AddForce(releaseDirection_ * forceMultiplier_);
-            
+            HammerBody_.AddForce(releaseDirection_ * forceMultiplier_*orbitSpeed_);
+
+            resetSwing();
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            resetSwing();
+           
 
             releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
-            HammerBody_.AddForce(releaseDirection_ * forceMultiplier_);
+            HammerBody_.AddForce(releaseDirection_ * forceMultiplier_*orbitSpeed_);
+
+            resetSwing();
         }
     }
     Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
