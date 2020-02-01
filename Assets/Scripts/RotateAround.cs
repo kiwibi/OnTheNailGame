@@ -173,12 +173,32 @@ public class RotateAround : MonoBehaviour
         };
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col_)
     {
-        Debug.Log(orbitSpeed_);
-        if (orbitSpeed_ > 0)
-            orbitSpeed_ -= collisionSpeedDecrease_;
+        if(col_.otherCollider.bounciness == 0.5f)
+        {
+            if (col_.gameObject.transform.tag != "Nail")
+            {
+               
+                if (orbitSpeed_ > 0)
+                    orbitSpeed_ -= collisionSpeedDecrease_;
+                else
+                    orbitSpeed_ = 0;
+            }
+        }
         else
-            orbitSpeed_ = 0;
+        {
+            if (col_.gameObject.transform.tag != "Nail")
+            {
+                if (orbitSpeed_ > 0)
+                    orbitSpeed_ -= collisionSpeedDecrease_;
+                else
+                    orbitSpeed_ = 0;
+            }
+            else
+            {
+                col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+            }
+        }      
     }
 }
