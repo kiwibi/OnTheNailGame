@@ -40,7 +40,7 @@ public class RotateAround : MonoBehaviour
         HammerBody_ = GetComponent<Rigidbody2D>();
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
-        orbit_ = 0;
+        orbit_ = (Mathf.PI / 2) * 3;
         gravityScale_ = HammerBody_.gravityScale;
         HammerBody_.gravityScale = 0;
         HammerBody_.angularVelocity = 0;
@@ -132,7 +132,7 @@ public class RotateAround : MonoBehaviour
         HammerBody_.velocity = Vector3.zero;
         HammerBody_.transform.rotation = startRotation_;
         HammerBody_.angularVelocity = 0;
-        orbit_ = 0;
+        orbit_ = (Mathf.PI / 2) * 3;
         orbitSpeed_ = speedReset_;
         spinThrottle_ = throttleReset_;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
