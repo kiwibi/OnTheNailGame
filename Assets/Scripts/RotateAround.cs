@@ -29,7 +29,6 @@ public class RotateAround : MonoBehaviour
     void Start()
     {
         HammerBody_ = GetComponent<Rigidbody2D>();
-        transform.position =  new Vector3(orbitDistance_, transform.position.y, transform.position.z);
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
         gravityScale_ = HammerBody_.gravityScale;
@@ -70,19 +69,20 @@ public class RotateAround : MonoBehaviour
             orbit_ += orbitSpeed_ * Time.deltaTime / 10;
             tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
-            //transform.position = tempPos_;
+            transform.position = tempPos_;
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
         {
-            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, tempPos_);
+            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             releaseDirection_ *= -1;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
             swinging_ = false;
 
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -91,6 +91,8 @@ public class RotateAround : MonoBehaviour
             releaseDirection_ = releaseDirection_ / magnitude;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
             swinging_ = false;
+
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
     }
     Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
@@ -117,6 +119,8 @@ public class RotateAround : MonoBehaviour
         HammerBody_.angularVelocity = 0;
         orbit_ = 0;
         orbitSpeed_ = speedReset_;
+
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
     }
 
     void RotateSprite(bool free)
@@ -127,7 +131,12 @@ public class RotateAround : MonoBehaviour
         }
         else
         {
-            Anchor_.transform.Rotate(new Vector3(0, 0, 1), orbit_);
+            Vector3 dir = (OrbitPoint_.transform.position - HammerBody_.transform.position);
+            Vector3 up = new Vector3(0, 0, 1);
+            var rotation = Quaternion.LookRotation(dir, up);
+            rotation.x = 0;
+            rotation.y = 0;
+            transform.rotation = rotation;
         }
     }
 

@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3724666043481123552}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c2941384112804d81396f3b5abbf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  objectA: {fileID: 0}
+  objectB: {fileID: 0}
 --- !u!114 &8529403809844092414
 MonoBehaviour:
   m_ObjectHideFlags: 0
