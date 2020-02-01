@@ -11,6 +11,9 @@ public class CameraScript : MonoBehaviour
     private float posZ;
     private float zoom;
 
+    private const float maximumZoom = 20;
+    private const float minimumZoom = 5;
+
     enum CameraState { swing, nail, transition, flying, flyingaway };
     private CameraState cameraState;
 
@@ -22,7 +25,7 @@ public class CameraScript : MonoBehaviour
         posZ = transform.position.z;
 
         //  Sets the zoom
-        zoom = 5;
+        zoom = maximumZoom;
 
         // Sets initial camera state
         cameraState = CameraState.swing;
@@ -183,7 +186,7 @@ public class CameraScript : MonoBehaviour
     private class NailCamera:FollowCamera
     {
         private Vector2 nailPosition;
-        private const float zoom = 3;
+        private const float zoom = minimumZoom;
 
         public NailCamera(Vector2 nailPos)
         {
@@ -204,7 +207,7 @@ public class CameraScript : MonoBehaviour
     private class SwingCamera:FollowCamera
     {
         private Vector2 swingPosition;
-        private const float zoom = 5;
+        private const float zoom = maximumZoom;
 
         public SwingCamera(Vector2 swingPos)
         {
@@ -229,8 +232,8 @@ public class CameraScript : MonoBehaviour
         private Vector2 positionB;
         private float zoom;
         private const float zoomDivider = 10;
-        private const float maxZoom = 5;
-        private const float minZoom = 2;
+        private const float maxZoom = maximumZoom;
+        private const float minZoom = minimumZoom;
 
         public FlyingCamera(Vector2 hammerPos, Vector2 nailPos)
         {
@@ -282,11 +285,11 @@ public class CameraScript : MonoBehaviour
         private Vector2 positionB;
         private Vector2 cameraPosition;
         private float zoom = 0;
-        private const float startZoom = 2;
-        private const float endZoom = 5;
+        private const float startZoom = minimumZoom;
+        private const float endZoom = maximumZoom;
         private float transitionState = 0;
         private float transitionLength = 0;
-        private const float transitionDivider = 3;
+        private const float transitionDivider = 30;
 
         public TransitionCamera(Vector2 startPos, Vector2 endPos)
         {
@@ -344,7 +347,7 @@ public class CameraScript : MonoBehaviour
         private FollowCamera flyingCamera;
         private FollowCamera transitionCamera;
         private Vector2 cameraPosition;
-        private float zoom = 5;
+        private float zoom = maximumZoom;
 
         public FlyAwayCamera(Vector2 swingPos, Vector2 hammerPos, Vector2 nailPos)
         {
