@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Geometry
+  - Nail
+  - Hammer
+  - Swing
   layers:
   - Default
   - TransparentFX
