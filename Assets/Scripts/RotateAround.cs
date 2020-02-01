@@ -93,6 +93,8 @@ public class RotateAround : MonoBehaviour
             releaseDirection_ *= -1;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
             swinging_ = false;
+
+           // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -102,6 +104,8 @@ public class RotateAround : MonoBehaviour
             releaseDirection_ = releaseDirection_ / magnitude;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
             swinging_ = false;
+
+           // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
     }
     //Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
@@ -131,7 +135,7 @@ public class RotateAround : MonoBehaviour
         orbit_ = (Mathf.PI / 2) * 3;
         orbitSpeed_ = speedReset_;
         spinThrottle_ = throttleReset_;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
+       // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
     }
 
     void RotateSprite(bool free)
@@ -171,8 +175,10 @@ public class RotateAround : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col_)
     {
-        if(col_.otherCollider.bounciness == 0.5f)
+       
+        if (col_.otherCollider.bounciness == 0.5f)
         {
+           
             if (col_.gameObject.transform.tag != "Nail")
             {
                
@@ -186,6 +192,7 @@ public class RotateAround : MonoBehaviour
         {
             if (col_.gameObject.transform.tag != "Nail")
             {
+              
                 if (orbitSpeed_ > 0)
                     orbitSpeed_ -= collisionSpeedDecrease_;
                 else
@@ -193,22 +200,27 @@ public class RotateAround : MonoBehaviour
             }
             else
             {
-                switch(col_.transform.rotation.eulerAngles.z)
+
+                switch (col_.transform.rotation.eulerAngles.z)
                 {
                     case 0:
-                        col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
-                        break;
-                    case 90:
+                        Debug.Log("0");
                         col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
                         break;
+                    case 90:
+                        Debug.Log("90");
+                        col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+                        break;
                     case 180:
-                        col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
+                        Debug.Log("180");
+                        col_.transform.position = new Vector3(col_.transform.position.x , col_.transform.position.y + 0.26f, col_.transform.position.z);
                         break;
                     case 270:
-                        col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y + 0.26f, col_.transform.position.z);
+                        Debug.Log("270");
+                        col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
                         break;
                 }
-                
+
             }
         }      
     }

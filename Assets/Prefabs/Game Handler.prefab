@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1737517295486237974}
   - component: {fileID: 2588241626133720749}
+  - component: {fileID: 5118067479606184013}
   m_Layer: 0
   m_Name: Game Handler
   m_TagString: Untagged
@@ -46,3 +47,15 @@ MonoBehaviour:
   numberOfStages: 3
   textHandlerReference: {fileID: 7857027799994610302, guid: a4713972b6bd74941a1591f5752350e1,
     type: 3}
+--- !u!114 &5118067479606184013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052307585178233136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a854a4b09c630c4495d6647b762e866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
