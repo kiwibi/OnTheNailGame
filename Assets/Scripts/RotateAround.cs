@@ -83,7 +83,8 @@ public class RotateAround : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
         {
-            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+            //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+            releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             releaseDirection_ *= -1;
@@ -94,7 +95,8 @@ public class RotateAround : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+            //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+            releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
             float magnitude = releaseDirection_.magnitude;
             releaseDirection_ = releaseDirection_ / magnitude;
             HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
@@ -103,22 +105,22 @@ public class RotateAround : MonoBehaviour
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
     }
-    Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
-    {
-        Vector3 normal_ = rhs - lhs;
-        Vector3 tangent;
-        Vector3 t1 = Vector3.Cross(normal_, Vector3.forward);
-        Vector3 t2 = Vector3.Cross(normal_, Vector3.up);
-        if (t1.magnitude > t2.magnitude)
-        {
-            tangent = t1;
-        }
-        else
-        {
-            tangent = t2;
-        }
-        return tangent;
-    }
+    //Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
+    //{
+    //    Vector3 normal_ = (rhs - lhs);
+    //    Vector3 tangent;
+    //    Vector3 t1 = Vector3.Cross(normal_, Vector3.forward);
+    //    Vector3 t2 = Vector3.Cross(normal_, Vector3.up);
+    //    if (t1.magnitude > t2.magnitude)
+    //    {
+    //        tangent = t1;
+    //    }
+    //    else
+    //    {
+    //        tangent = t2;
+    //    }
+    //    return tangent;
+    //}
 
     void resetSwing()
     {
