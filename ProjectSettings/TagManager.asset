@@ -7,6 +7,7 @@ TagManager:
   - Geometry
   - Nail
   - Hammer
+  - Swing
   layers:
   - Default
   - TransparentFX
