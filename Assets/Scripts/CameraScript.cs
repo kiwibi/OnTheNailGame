@@ -24,12 +24,16 @@ public class CameraScript : MonoBehaviour
     private float minCameraY;
     private float maxCameraY;
 
+    enum CameraState { player, nails };
+    private CameraState cameraState;
 
     void Start()
     {
         posZ = transform.position.z;
 
         SetCameraPositions();
+
+        cameraState = CameraState.player;
     }
 
     void Update()
