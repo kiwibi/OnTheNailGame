@@ -197,7 +197,22 @@ public class RotateAround : MonoBehaviour
             }
             else
             {
-                col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+                switch(col_.transform.rotation.eulerAngles.z)
+                {
+                    case 0:
+                        col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+                        break;
+                    case 90:
+                        col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
+                        break;
+                    case 180:
+                        col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
+                        break;
+                    case 270:
+                        col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y + 0.26f, col_.transform.position.z);
+                        break;
+                }
+                
             }
         }      
     }
