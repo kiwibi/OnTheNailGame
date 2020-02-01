@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7899599355006296564}
   - component: {fileID: 3458280969392192656}
   - component: {fileID: 1100140173840025190}
+  - component: {fileID: 7648730200124956506}
   m_Layer: 0
   m_Name: Nail
   m_TagString: Untagged
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012135506, y: -0.1092453}
+  m_Offset: {x: -0.012136459, y: -0.1092453}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,5 +134,26 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7034178, y: 1.8930826}
+  m_Size: {x: 0.306942, y: 1.8930826}
   m_EdgeRadius: 0
+--- !u!50 &7648730200124956506
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7899599355006296565}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 2
+  m_CollisionDetection: 0
+  m_Constraints: 0

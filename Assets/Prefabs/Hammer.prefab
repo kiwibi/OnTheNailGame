@@ -111,11 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OrbitPoint_: {fileID: 0}
-  orbitDistance_: 2
-  speedIncrease_: 0.1
-  orbitSpeed_: 30
-  orbitSpeedCap_: 0
-  forceMultiplier_: 0
+  orbitDistance_: 4
+  speedIncrease_: 0.15
+  orbitSpeed_: 32
+  orbitSpeedCap_: 300
+  forceMultiplier_: 16
 --- !u!61 &9034913024563654777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,8 +125,8 @@ BoxCollider2D:
   m_GameObject: {fileID: 1232246253098333334}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 6200000, guid: 10b5a68bcdc66b14e837de048af810d1, type: 2}
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.07663447, y: 0.8099575}
@@ -151,7 +151,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1232246253098333334}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 10b5a68bcdc66b14e837de048af810d1, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -171,11 +171,11 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_LinearDrag: 0.3
+  m_AngularDrag: 0.02
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
