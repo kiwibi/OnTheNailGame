@@ -33,6 +33,7 @@ public class RotateAround : MonoBehaviour
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
         gravityScale_ = HammerBody_.gravityScale;
+        HammerBody_.gravityScale = 0;
         swinging_ = true;
         startRotation_ = HammerBody_.transform.rotation;
     }
@@ -113,6 +114,7 @@ public class RotateAround : MonoBehaviour
     {
         HammerBody_.velocity = Vector3.zero;
         HammerBody_.transform.rotation = startRotation_;
+        HammerBody_.angularVelocity = 0;
         orbit_ = 0;
         orbitSpeed_ = speedReset_;
     }
@@ -121,7 +123,7 @@ public class RotateAround : MonoBehaviour
     {
         if (free)
         {
-            transform.Rotate(new Vector3(0, 0, 1), orbit_);
+            //transform.Rotate(new Vector3(0, 0, 1), orbit_);
         }
         else
         {
