@@ -18,6 +18,12 @@ public class RotateAround : MonoBehaviour
     public float orbitSpeedCap_;
     [Tooltip("Force multiplier when releasing hammer")]
     public float forceMultiplier_;
+    [Header("spin variables")]
+    [Tooltip("big number that decreases spin speed")]
+    public float spinThrottle_;
+    [Tooltip("small number that decreses the spin throttle over time")]
+    public float spinSpeedDecrease_;
+
     private float orbit_; //radian degree toward the center object
     private float speedReset_;
     private Vector3 tempPos_;
@@ -60,6 +66,7 @@ public class RotateAround : MonoBehaviour
             orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
             tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+            tempPos_.z = transform.position.z;
             transform.position = tempPos_;
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
@@ -69,6 +76,7 @@ public class RotateAround : MonoBehaviour
             orbit_ += orbitSpeed_ * Time.deltaTime / 10;
             tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+            tempPos_.z = transform.position.z;
             transform.position = tempPos_;
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
@@ -127,7 +135,9 @@ public class RotateAround : MonoBehaviour
     {
         if (free)
         {
-            //transform.Rotate(new Vector3(0, 0, 1), orbit_);
+
+            transform.Rotate(new Vector3(0, 0, 1), orbit_* orbitSpeed_ / spinThrottle_);
+            spinThrottle_ -= spinSpeedDecrease_;
         }
         else
         {
