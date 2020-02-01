@@ -123,11 +123,6 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    private class TextManager
-    {
-        
-    }
-
     private class Score
     {
         private int currentSwings;
