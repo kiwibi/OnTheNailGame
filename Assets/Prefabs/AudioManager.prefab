@@ -56,3 +56,33 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - Name: Throw
+    clip: {fileID: 8300000, guid: 9441983e5fe0689408648ad6b949a334, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: ThrowYeet
+    clip: {fileID: 8300000, guid: ab50a10c32f8ede49ae1c6b36aa4e4f8, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: MenuTheme
+    clip: {fileID: 8300000, guid: f81699aa7801e584b96924ba5ff3c10f, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Bounce
+    clip: {fileID: 8300000, guid: da47387b302cb7b43bd7a0bef7543532, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: NailHit
+    clip: {fileID: 8300000, guid: d2c2cc8d2959deb439ca25a5cda24aa2, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
