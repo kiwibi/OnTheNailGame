@@ -9,6 +9,7 @@ TagManager:
   - Hammer
   - Swing
   - FxTemporaire
+  - GameHandler
   layers:
   - Default
   - TransparentFX
