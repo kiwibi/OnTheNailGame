@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5118067479606184013}
   m_Layer: 0
   m_Name: Game Handler
-  m_TagString: Untagged
+  m_TagString: GameHandler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   numberOfStages: 3
   textHandlerReference: {fileID: 7857027799994610302, guid: a4713972b6bd74941a1591f5752350e1,
     type: 3}
+  audioManager: {fileID: 0}
 --- !u!114 &5118067479606184013
 MonoBehaviour:
   m_ObjectHideFlags: 0

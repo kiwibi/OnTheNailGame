@@ -43,6 +43,7 @@ public class RotateAround : MonoBehaviour
     private Vector3 releaseDirection_;
     private float gravityScale_;
     private bool swinging_;
+    private bool introScene_;
     private Quaternion startRotation_;
 
     void Start()
@@ -57,6 +58,7 @@ public class RotateAround : MonoBehaviour
         HammerBody_.gravityScale = 0;
         HammerBody_.angularVelocity = 0;
         swinging_ = true;
+        introScene_ = true;
         startRotation_ = HammerBody_.transform.rotation;
         throttleReset_ = spinThrottle_;
 
@@ -65,13 +67,16 @@ public class RotateAround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rotate();
-
-        HammerState(swinging_);
-
-        if(Input.GetKey(KeyCode.Space))
+        if (introScene_)
         {
-            resetSwing();
+            Rotate();
+
+            HammerState(swinging_);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                resetSwing();
+            }
         }
     }
 
@@ -84,6 +89,9 @@ public class RotateAround : MonoBehaviour
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
             tempPos_.z = transform.position.z;
             transform.position = tempPos_;
+            if(transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                FindObjectOfType<AudioManager>().Play("The swosh");
+
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
@@ -261,14 +269,13 @@ public class RotateAround : MonoBehaviour
         foreach(GameObject wall in walls_)
         {
             distance = newPos.x - wall.transform.position.x;
-            Debug.Log(distance);
             if (distance > -wallArea_ && distance < 0)
             {
-                newPos.x -= wallPushback_;
+                newPos.x = wall.transform.position.x - wallPushback_;
             }
             else if (distance < wallArea_ && distance > 0)
             {
-                newPos.x += wallPushback_;
+                newPos.x = wall.transform.position.x + wallPushback_;
             }
             
         }
@@ -278,5 +285,10 @@ public class RotateAround : MonoBehaviour
     public bool isSwinging()
     {
         return swinging_;
+    }
+
+    public void setIntroSwing(bool isItPlaying)
+    {
+        introScene_ = isItPlaying;
     }
 }
