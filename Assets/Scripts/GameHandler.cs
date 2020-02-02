@@ -17,6 +17,8 @@ public class GameHandler : MonoBehaviour
     private StageHandler stageHandler;
     private GameObject textHandler;
 
+    private bool startSequence;
+
     private void Awake()
     {
         if (instance == null)
@@ -35,6 +37,7 @@ public class GameHandler : MonoBehaviour
         stageHandler = new StageHandler(numberOfStages);
         highscore = new Highscore();
         textHandler = null;
+        startSequence = false;
     }
 
     private void Update()
@@ -51,6 +54,24 @@ public class GameHandler : MonoBehaviour
         {
             stageHandler.NextStage();
             CheckToSpawnTextHandler();
+        }
+
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    stageHandler.NextStage();
+        //    CheckToSpawnTextHandler();
+        //}
+
+        if (GameObject.FindGameObjectWithTag("Hammer") != null)
+        {
+            if (startSequence)
+            {
+                GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(false);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(true);
+            }
         }
     }
 
@@ -76,6 +97,12 @@ public class GameHandler : MonoBehaviour
         highscore.NewScore();
         stageHandler.StartNewGame();
         audioManager.GetComponent<AudioManager>().PlayMusic(1);
+        startSequence = true;
+    }
+
+    public void SetStartSequence(bool b)
+    {
+        startSequence = b;
     }
 
     public int GetSwings()
