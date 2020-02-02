@@ -18,6 +18,7 @@ public class RotateAround : MonoBehaviour
     public float orbitSpeed_;
     [Tooltip("orbit speed cap")]
     public float orbitSpeedCap_;
+    public float yeetSpeedCap_;
     [Tooltip("Force multiplier when releasing hammer")]
     public float forceMultiplier_;
     [Header("spin variables")]
@@ -48,6 +49,7 @@ public class RotateAround : MonoBehaviour
     private Quaternion startRotation_;
     private float amountOfBounce_;
     private float bounceAcumelator_;
+    private float yeetNumber_;
 
     void Start()
     {
@@ -108,6 +110,8 @@ public class RotateAround : MonoBehaviour
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
             tempPos_.z = transform.position.z;
             transform.position = tempPos_;
+            if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                FindObjectOfType<AudioManager>().Play("The swosh");
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
@@ -115,6 +119,12 @@ public class RotateAround : MonoBehaviour
         {
             if (HammerBody_.velocity == Vector2.zero)
             {
+                yeetNumber_ = Random.Range(0, 100);
+
+                if(yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                    FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                else
+                    FindObjectOfType<AudioManager>().Play("Throw");
                 //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
                 releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
                 float magnitude = releaseDirection_.magnitude;
@@ -129,6 +139,12 @@ public class RotateAround : MonoBehaviour
         {
             if (HammerBody_.velocity == Vector2.zero)
             {
+                yeetNumber_ = Random.Range(0, 100);
+
+                if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                    FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                else
+                    FindObjectOfType<AudioManager>().Play("Throw");
                 //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
                 releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
                 float magnitude = releaseDirection_.magnitude;
@@ -190,7 +206,7 @@ public class RotateAround : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (bounceAcumelator_ < 1)
+        if (bounceAcumelator_ < 2)
             bounceAcumelator_ += 1*Time.deltaTime;
         else
         {
@@ -218,7 +234,7 @@ public class RotateAround : MonoBehaviour
                 {
 
                     HammerBody_.velocity = new Vector2(0, 0);
-                    resetSwing();
+                    //resetSwing();
                 }
                    
             }
@@ -232,23 +248,21 @@ public class RotateAround : MonoBehaviour
                 if (amountOfBounces_ > 0)
                 {
                     amountOfBounces_--;
-                    return;
+       
                 }
-                if ((HammerBody_.velocity.x <= 0.4f && HammerBody_.velocity.y <= 0.4f))
+                if (amountOfBounces_ == 0)
                 {
                     
                     HammerBody_.velocity = new Vector2(0, 0);
                     float dist = Vector3.Distance(transform.position, Sling_.transform.position);
-                    if (dist > 2 /*&& dist > 0*/|| dist < -2/* && dist < 0*/)
+                    if (dist > 1.5f /*&& dist > 0*/|| dist < -1.5f/* && dist < 0*/)
                     {
                         float yValue = col_.transform.position.y + 0.95f;
                         if (col_.transform.tag == "Geometry")
                         {
-                            Debug.Log(":)");
                             yValue = col_.collider.bounds.min.y + 0.75f;
                         }
                            
-                        Debug.Log(yValue);
                         Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, yValue, Sling_.transform.position.z));
                         Sling_.transform.position = distance;
                     }
@@ -297,7 +311,7 @@ public class RotateAround : MonoBehaviour
                         }
                         break;
                 }
-                //GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>()
+                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().GoToScene("NextLevel");
             }
         }      
     }
