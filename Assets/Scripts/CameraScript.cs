@@ -28,10 +28,13 @@ public class CameraScript : MonoBehaviour
         zoom = maximumZoom;
 
         // Sets initial camera state
-        cameraState = CameraState.swing;
+        cameraState = CameraState.nail;
 
         //  Initializes cameraList
         cameraList = new List<FollowCamera>();
+
+        //  Initializes first camera
+        SetCamera("nail", GameObject.FindGameObjectWithTag("Nail").transform.position);
     }
 
     void LateUpdate()
@@ -47,7 +50,7 @@ public class CameraScript : MonoBehaviour
             GetComponent<Camera>().orthographicSize = zoom;
 
             //  Debug
-            Debug.Log("Camera X: " + posX + " Camera Y: " + posY + " Camera zoom: " + zoom);
+            //Debug.Log("Camera X: " + posX + " Camera Y: " + posY + " Camera zoom: " + zoom);
         }
     }
 
@@ -60,6 +63,21 @@ public class CameraScript : MonoBehaviour
                 if (cameraList[0].UpdateCamera() == true)
                 {
                     SetCamera("flying", cameraList[0].GetStartPosition(), cameraList[0].GetEndPosition());
+                }
+            }
+            else if (cameraState == CameraState.nail)
+            {
+                if (cameraList[0].UpdateCamera() == true)
+                {
+                    SetCamera("transition", cameraList[0].GetStartPosition(), GameObject.FindGameObjectWithTag("Swing").transform.Find("Swingpoint").transform.position);
+                }
+            }
+            else if (cameraState == CameraState.transition)
+            {
+                if (cameraList[0].UpdateCamera() == true)
+                {
+                    SetCamera("swing", cameraList[0].GetEndPosition(), GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().SetStartSequence(false);
                 }
             }
             else
@@ -195,6 +213,7 @@ public class CameraScript : MonoBehaviour
     {
         private Vector2 nailPosition;
         private const float zoom = minimumZoom;
+        private float timer = 1.5f;
 
         public NailCamera(Vector2 nailPos)
         {
@@ -209,6 +228,20 @@ public class CameraScript : MonoBehaviour
         public override float GetZoom()
         {
             return zoom;
+        }
+
+        public override bool UpdateCamera()
+        {
+            timer -= Time.deltaTime;
+
+            if (timer < 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     };
 

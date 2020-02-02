@@ -64,7 +64,11 @@ public class GameHandler : MonoBehaviour
 
         if (startSequence)
         {
-            GameObject.FindGameObjectWithTag("Hammer");
+            GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(false);
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(true);
         }
     }
 
