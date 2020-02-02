@@ -21,8 +21,8 @@ public class TextHandler : MonoBehaviour
     void Update()
     {
         swingText.text = gameHandler.GetComponent<GameHandler>().GetSwings().ToString();
-        parText.text = gameHandler.GetComponent<GameHandler>().GetPar().ToString();
-        stageNumber.text = gameHandler.GetComponent<GameHandler>().GetStage().ToString();
+        parText.text = "Par " + gameHandler.GetComponent<GameHandler>().GetPar().ToString();
+        stageNumber.text = "Stage " + gameHandler.GetComponent<GameHandler>().GetStage().ToString();
     }
 
     public void SetGameHandler(GameObject GH)
