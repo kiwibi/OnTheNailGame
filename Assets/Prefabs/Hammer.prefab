@@ -104,15 +104,15 @@ MonoBehaviour:
   orbitDistance_: 0.7
   speedIncrease_: 0.15
   orbitSpeed_: 32
-  orbitSpeedCap_: 300
-  yeetSpeedCap_: 0
+  orbitSpeedCap_: 200
+  yeetSpeedCap_: 99
   forceMultiplier_: 6
   spinThrottle_: 1000
   spinSpeedDecrease_: 0.001
   collisionSpeedDecrease_: 100
   wallArea_: 1
   wallPushback_: 1.4
-  amountOfBounces_: 5
+  amountOfBounces_: 3
   VFXFiles_:
   - {fileID: 5153023947481034542, guid: 900f5ace6360f6647ba7b21f8889ea5f, type: 3}
   - {fileID: 5199738989155053770, guid: b2b4c04473727d546afcfd76bc70b186, type: 3}
