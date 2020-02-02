@@ -214,7 +214,7 @@ public class CameraScript : MonoBehaviour
     {
         private Vector2 nailPosition;
         private const float zoom = minimumZoom;
-        private float timer = 1.5f;
+        private float timer = 2.5f;
 
         public NailCamera(Vector2 nailPos)
         {

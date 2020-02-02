@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -25, y: -25}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &193935395
 CanvasRenderer:
@@ -67,14 +67,14 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6435a178c31b8cc47b2d01f981f4f907, type: 3}
     m_FontSize: 48
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 64
     m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Number of Swings
 --- !u!1 &1114707165
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -278,8 +278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 75}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -25, y: 75}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3856156968338700658
 CanvasRenderer:
@@ -311,14 +311,14 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6435a178c31b8cc47b2d01f981f4f907, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 64
     m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Stage Par
 --- !u!1 &7857027799994610302
@@ -405,8 +405,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 25}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -25, y: 25}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &6946100476354158383
 CanvasRenderer:
@@ -438,13 +438,13 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6435a178c31b8cc47b2d01f981f4f907, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 64
     m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Stage Number
