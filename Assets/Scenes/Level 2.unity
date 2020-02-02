@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 29526988}
   m_Layer: 0
   m_Name: Square 100x100 (6)
-  m_TagString: Untagged
+  m_TagString: NoSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1244,7 +1244,7 @@ GameObject:
   - component: {fileID: 883089198}
   m_Layer: 0
   m_Name: Square 100x100 (11)
-  m_TagString: Untagged
+  m_TagString: NoSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2453,8 +2453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875794595}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.215, y: 3.7, z: 0}
-  m_LocalScale: {x: 0.5700844, y: 1.4563459, z: 1}
+  m_LocalPosition: {x: -2.227, y: 3.7, z: 0}
+  m_LocalScale: {x: 0.5700844, y: 1.48023, z: 1}
   m_Children: []
   m_Father: {fileID: 1790537571}
   m_RootOrder: 9
