@@ -104,7 +104,7 @@ MonoBehaviour:
   orbitDistance_: 0.7
   speedIncrease_: 0.15
   orbitSpeed_: 32
-  orbitSpeedCap_: 300
+  orbitSpeedCap_: 200
   yeetSpeedCap_: 0
   forceMultiplier_: 6
   spinThrottle_: 1000
