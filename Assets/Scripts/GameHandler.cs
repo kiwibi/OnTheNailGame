@@ -46,21 +46,18 @@ public class GameHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NewGame();
-            CheckToSpawnTextHandler();
+            GoToScene("StartGame");
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            stageHandler.NextStage();
-            CheckToSpawnTextHandler();
+            GoToScene("NextLevel");
         }
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    stageHandler.NextStage();
-        //    CheckToSpawnTextHandler();
-        //}
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GoToScene("Menu");
+        }
 
         if (GameObject.FindGameObjectWithTag("Hammer") != null)
         {
@@ -87,6 +84,46 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void GoToScene(string sceneType)
+    {
+        StartCoroutine(SceneTransition(sceneType));
+    }
+
+    private IEnumerator SceneTransition(string sceneType)
+    {
+        if (textHandler != null)
+        {
+            textHandler.GetComponent<TextHandler>().PlayTransition();
+            audioManager.GetComponent<AudioManager>().Play("Transition");
+        }
+        else if (GameObject.FindGameObjectWithTag("Planks") != null)
+        {
+            GameObject.FindGameObjectWithTag("Planks").GetComponent<Animator>().SetTrigger("Start");
+            audioManager.GetComponent<AudioManager>().Play("Transition");
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        switch (sceneType)
+        {
+            case "Menu":
+                MainMenu();
+                break;
+
+            case "NextLevel":
+                if (SceneManager.GetActiveScene().name != "Menu")
+                {
+                    stageHandler.NextStage();
+                    CheckToSpawnTextHandler();
+                }
+                break;
+
+            case "StartGame":
+                NewGame();
+                break;
+        }
+    }
+
     public void SetNewTextHandler(GameObject textH)
     {
         textHandler = textH;
@@ -97,6 +134,14 @@ public class GameHandler : MonoBehaviour
         highscore.NewScore();
         stageHandler.StartNewGame();
         audioManager.GetComponent<AudioManager>().PlayMusic(1);
+        startSequence = true;
+    }
+
+    public void MainMenu()
+    {
+        highscore.DiscardScore();
+        stageHandler.GoToMainMenu();
+        audioManager.GetComponent<AudioManager>().PlayMusic(0);
         startSequence = true;
     }
 
@@ -172,6 +217,12 @@ public class GameHandler : MonoBehaviour
         {
             currentStage = 0;
             SceneManager.LoadScene("Level 1");
+        }
+
+        public void GoToMainMenu()
+        {
+            currentStage = 0;
+            SceneManager.LoadScene("Menu");
         }
     }
 

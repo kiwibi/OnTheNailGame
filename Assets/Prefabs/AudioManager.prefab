@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1394232188990120150}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f81699aa7801e584b96924ba5ff3c10f, type: 3}
     volume: 0.27
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - Name: Bounce
     clip: {fileID: 8300000, guid: da47387b302cb7b43bd7a0bef7543532, type: 3}
@@ -94,6 +94,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - Name: Button
     clip: {fileID: 8300000, guid: 0ac3eba7d5246fc43aacd61ebcdda88e, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Transition
+    clip: {fileID: 8300000, guid: ff44c48a99e19e44e87508beca6bb9a7, type: 3}
     volume: 0.27
     pitch: 1
     loop: 0

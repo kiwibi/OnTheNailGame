@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 29526988}
   m_Layer: 0
   m_Name: Square 100x100 (6)
-  m_TagString: Untagged
+  m_TagString: NoSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -471,8 +471,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321793524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1, y: 6.838, z: 0}
-  m_LocalScale: {x: 0.459375, y: 2.5317101, z: 1}
+  m_LocalPosition: {x: -5.1, y: 6.835, z: 0}
+  m_LocalScale: {x: 0.459375, y: 2.5377862, z: 1}
   m_Children: []
   m_Father: {fileID: 1790537571}
   m_RootOrder: 6
@@ -579,8 +579,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463725125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51, y: 0.309, z: 0}
-  m_LocalScale: {x: 0.459375, y: 3.8020859, z: 1}
+  m_LocalPosition: {x: -0.51, y: 0.2977, z: 0}
+  m_LocalScale: {x: 0.459375, y: 3.749683, z: 1}
   m_Children: []
   m_Father: {fileID: 1790537571}
   m_RootOrder: 2
@@ -803,8 +803,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630934378}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -3.901, y: 5.34, z: 0}
-  m_LocalScale: {x: 0.459375, y: 2.783822, z: 1}
+  m_LocalPosition: {x: -3.9174, y: 5.34, z: 0}
+  m_LocalScale: {x: 0.459375, y: 2.8166714, z: 1}
   m_Children: []
   m_Father: {fileID: 1790537571}
   m_RootOrder: 8
@@ -1244,7 +1244,7 @@ GameObject:
   - component: {fileID: 883089198}
   m_Layer: 0
   m_Name: Square 100x100 (11)
-  m_TagString: Untagged
+  m_TagString: NoSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2453,8 +2453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875794595}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.215, y: 3.7, z: 0}
-  m_LocalScale: {x: 0.5700844, y: 1.4563459, z: 1}
+  m_LocalPosition: {x: -2.227, y: 3.7, z: 0}
+  m_LocalScale: {x: 0.5700844, y: 1.48023, z: 1}
   m_Children: []
   m_Father: {fileID: 1790537571}
   m_RootOrder: 9
