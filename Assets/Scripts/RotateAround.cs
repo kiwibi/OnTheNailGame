@@ -69,7 +69,7 @@ public class RotateAround : MonoBehaviour
     {
         if (introScene_)
         {
-            Debug.Log(HammerBody_.velocity);
+  
             Rotate();
 
             HammerState(swinging_);
@@ -212,7 +212,12 @@ public class RotateAround : MonoBehaviour
                     {
                         float yValue = col_.transform.position.y + 0.95f;
                         if (col_.transform.tag == "Geometry")
-                            yValue = col_.collider.bounds.min.y + 1.25f;
+                        {
+                            Debug.Log(":)");
+                            yValue = col_.collider.bounds.min.y + 0.75f;
+                        }
+                           
+                        Debug.Log(yValue);
                         Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, yValue, Sling_.transform.position.z));
                         Sling_.transform.position = distance;
                     }
