@@ -184,6 +184,7 @@ public class RotateAround : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col_)
     {
+        Debug.Log(amountOfBounces_);
         if (col_.otherCollider.bounciness == 0.5f)
         {
             Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
