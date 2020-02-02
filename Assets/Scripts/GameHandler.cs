@@ -110,11 +110,23 @@ public class GameHandler : MonoBehaviour
                 MainMenu();
                 break;
 
+            case "End":
+                EndScreen();
+                break;
+
             case "NextLevel":
                 if (SceneManager.GetActiveScene().name != "Menu")
                 {
-                    stageHandler.NextStage();
-                    CheckToSpawnTextHandler();
+                    if (stageHandler.NextStage())
+                    {
+                        EndScreen();
+                        highscore.GetCurrentScore().StoreSwings();
+                    }
+                    else
+                    {
+                        highscore.GetCurrentScore().StoreSwings();
+                        CheckToSpawnTextHandler();
+                    }
                 }
                 break;
 
@@ -142,12 +154,22 @@ public class GameHandler : MonoBehaviour
         highscore.DiscardScore();
         stageHandler.GoToMainMenu();
         audioManager.GetComponent<AudioManager>().PlayMusic(0);
-        startSequence = true;
+    }
+
+    public void EndScreen()
+    {
+        stageHandler.GoToEndScreen();
+        audioManager.GetComponent<AudioManager>().PlayMusic(0);
     }
 
     public void SetStartSequence(bool b)
     {
         startSequence = b;
+    }
+
+    public void AddSwing()
+    {
+        highscore.GetCurrentScore().AddSwing();
     }
 
     public int GetSwings()
@@ -224,6 +246,12 @@ public class GameHandler : MonoBehaviour
             currentStage = 0;
             SceneManager.LoadScene("Menu");
         }
+
+        public void GoToEndScreen()
+        {
+            currentStage = 0;
+            SceneManager.LoadScene("EndScreen");
+        }
     }
 
     private class Score
@@ -239,17 +267,17 @@ public class GameHandler : MonoBehaviour
             name = "";
         }
 
-        private void AddSwing()
+        public void AddSwing()
         {
             currentSwings++;
         }
 
-        private void ResetSwings()
+        public void ResetSwings()
         {
             currentSwings = 0;
         }
 
-        private void StoreSwings()
+        public void StoreSwings()
         {
             totalSwings += currentSwings;
             currentSwings = 0;
