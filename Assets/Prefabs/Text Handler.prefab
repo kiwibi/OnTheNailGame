@@ -369,6 +369,8 @@ MonoBehaviour:
   swingText: {fileID: 193935394}
   parText: {fileID: 68417413801205995}
   stageNumber: {fileID: 7440408179250039318}
+  transition: {fileID: 2504580500690339013, guid: dc69ae3937d9a914796d2a63249a7cfe,
+    type: 3}
 --- !u!1 &9029397969156933369
 GameObject:
   m_ObjectHideFlags: 0
