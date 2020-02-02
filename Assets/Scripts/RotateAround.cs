@@ -6,6 +6,9 @@ public class RotateAround : MonoBehaviour
 {
     public GameObject OrbitPoint_;
     private Rigidbody2D HammerBody_;
+    private Transform HandleFlash_;
+    private GameObject Sling_;
+    private GameObject[] walls_;
 
     public float orbitDistance_;
     [Header("Speed variables")]
@@ -25,6 +28,13 @@ public class RotateAround : MonoBehaviour
     [Header("collision variables")]
     [Tooltip("Amount of speed decresed by every collision   subtraction used")]
     public float collisionSpeedDecrease_;
+    [Tooltip("area to check for wall closeness")]
+    public float wallArea_;
+    [Tooltip("how far the swing gets pushed if inside wallArea_")]
+    public float wallPushback_;
+
+    [Header("VFX files")]
+    public GameObject[] VFXFiles_;
 
     private float orbit_; //radian degree toward the center object
     private float speedReset_;
@@ -33,11 +43,14 @@ public class RotateAround : MonoBehaviour
     private Vector3 releaseDirection_;
     private float gravityScale_;
     private bool swinging_;
+    private bool introScene_;
     private Quaternion startRotation_;
 
     void Start()
     {
         HammerBody_ = GetComponent<Rigidbody2D>();
+        HandleFlash_ = gameObject.transform.GetChild(0);
+        Sling_ = GameObject.FindGameObjectWithTag("Swing");
         tempPos_ = new Vector3(0, 0, 0);
         speedReset_ = orbitSpeed_;
         orbit_ = (Mathf.PI / 2) * 3;
@@ -45,20 +58,25 @@ public class RotateAround : MonoBehaviour
         HammerBody_.gravityScale = 0;
         HammerBody_.angularVelocity = 0;
         swinging_ = true;
+        introScene_ = true;
         startRotation_ = HammerBody_.transform.rotation;
         throttleReset_ = spinThrottle_;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rotate();
-
-        HammerState(swinging_);
-
-        if(Input.GetKey(KeyCode.Space))
+        if (introScene_)
         {
-            resetSwing();
+            Rotate();
+
+            HammerState(swinging_);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                resetSwing();
+            }
         }
     }
 
@@ -71,6 +89,9 @@ public class RotateAround : MonoBehaviour
             tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
             tempPos_.z = transform.position.z;
             transform.position = tempPos_;
+            if(transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                FindObjectOfType<AudioManager>().Play("The swosh");
+
             if (orbitSpeed_ < orbitSpeedCap_)
                 orbitSpeed_ += speedIncrease_;
         }
@@ -108,23 +129,6 @@ public class RotateAround : MonoBehaviour
            // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
     }
-    //Vector3 calculateTan(Vector3 lhs, Vector3 rhs)
-    //{
-    //    Vector3 normal_ = (rhs - lhs);
-    //    Vector3 tangent;
-    //    Vector3 t1 = Vector3.Cross(normal_, Vector3.forward);
-    //    Vector3 t2 = Vector3.Cross(normal_, Vector3.up);
-    //    if (t1.magnitude > t2.magnitude)
-    //    {
-    //        tangent = t1;
-    //    }
-    //    else
-    //    {
-    //        tangent = t2;
-    //    }
-    //    return tangent;
-    //}
-
     void resetSwing()
     {
         swinging_ = true;
@@ -175,53 +179,116 @@ public class RotateAround : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col_)
     {
-       
         if (col_.otherCollider.bounciness == 0.5f)
         {
-           
+            Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().Play("Bounce");
             if (col_.gameObject.transform.tag != "Nail")
             {
-               
+                  
                 if (orbitSpeed_ > 0)
                     orbitSpeed_ -= collisionSpeedDecrease_;
                 else
+                {
                     orbitSpeed_ = 0;
+                }
+                   
             }
         }
         else
         {
             if (col_.gameObject.transform.tag != "Nail")
             {
-              
+                //Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
+                FindObjectOfType<AudioManager>().Play("Bounce");
                 if (orbitSpeed_ > 0)
                     orbitSpeed_ -= collisionSpeedDecrease_;
                 else
+                {
                     orbitSpeed_ = 0;
+                    float dist = transform.position.x - Sling_.transform.position.x;
+                    if (dist > 2 /*&& dist > 0*/|| dist < -2/* && dist < 0*/)
+                    {
+                        Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, Sling_.transform.position.y, Sling_.transform.position.z));
+                        Sling_.transform.position = distance;
+                    }
+                    resetSwing();
+                }
             }
             else
             {
-
+                FindObjectOfType<AudioManager>().Play("NailHit");
                 switch (col_.transform.rotation.eulerAngles.z)
                 {
-                    case 0:
-                        Debug.Log("0");
-                        col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
+                    case 0:     //top
+                        if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
+                        {
+                            Instantiate(VFXFiles_[0], col_.transform);
+                            col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
+                            
+                            col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                        }
                         break;
-                    case 90:
-                        Debug.Log("90");
-                        col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+                    case 90:     //right
+                        if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
+                        {
+                            Instantiate(VFXFiles_[0], col_.transform);
+                            col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
+                            
+                            col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                        }
                         break;
-                    case 180:
-                        Debug.Log("180");
-                        col_.transform.position = new Vector3(col_.transform.position.x , col_.transform.position.y + 0.26f, col_.transform.position.z);
+                    case 180:     //bottom
+                        if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
+                        {
+                            Instantiate(VFXFiles_[0], col_.transform);
+                            col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y + 0.26f, col_.transform.position.z);
+                            
+                            col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                        }
                         break;
-                    case 270:
-                        Debug.Log("270");
-                        col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
+                    case 270:     //left
+                        if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
+                        {
+                            Instantiate(VFXFiles_[0], col_.transform);
+                            col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
+                           
+                            col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                        }
                         break;
                 }
 
             }
         }      
+    }
+
+    private Vector3 CheckWallDistance(Vector3 newPos)
+    {
+        float distance;
+        walls_ = GameObject.FindGameObjectsWithTag("Geometry");
+        foreach(GameObject wall in walls_)
+        {
+            distance = newPos.x - wall.transform.position.x;
+            if (distance > -wallArea_ && distance < 0)
+            {
+                newPos.x = wall.transform.position.x - wallPushback_;
+            }
+            else if (distance < wallArea_ && distance > 0)
+            {
+                newPos.x = wall.transform.position.x + wallPushback_;
+            }
+            
+        }
+        return newPos;
+    }
+
+    public bool isSwinging()
+    {
+        return swinging_;
+    }
+
+    public void setIntroSwing(bool isItPlaying)
+    {
+        introScene_ = isItPlaying;
     }
 }
