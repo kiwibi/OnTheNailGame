@@ -112,7 +112,7 @@ MonoBehaviour:
   collisionSpeedDecrease_: 100
   wallArea_: 1
   wallPushback_: 1.4
-  amountOfBounces_: 5
+  amountOfBounces_: 3
   VFXFiles_:
   - {fileID: 5153023947481034542, guid: 900f5ace6360f6647ba7b21f8889ea5f, type: 3}
   - {fileID: 5199738989155053770, guid: b2b4c04473727d546afcfd76bc70b186, type: 3}
