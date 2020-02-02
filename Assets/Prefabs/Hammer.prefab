@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7726960545092776756}
+  - {fileID: 9037760228019046256}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
@@ -104,6 +105,7 @@ MonoBehaviour:
   speedIncrease_: 0.15
   orbitSpeed_: 32
   orbitSpeedCap_: 300
+  yeetSpeedCap_: 0
   forceMultiplier_: 6
   spinThrottle_: 1000
   spinSpeedDecrease_: 0.001
@@ -114,6 +116,7 @@ MonoBehaviour:
   VFXFiles_:
   - {fileID: 5153023947481034542, guid: 900f5ace6360f6647ba7b21f8889ea5f, type: 3}
   - {fileID: 5199738989155053770, guid: b2b4c04473727d546afcfd76bc70b186, type: 3}
+  - {fileID: 2722674209427690377, guid: 1effb6569e12c9342ae13b00fadf0d38, type: 3}
 --- !u!114 &3701454090126504549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +195,36 @@ Rigidbody2D:
   m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &3700522894787583636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9037760228019046256}
+  m_Layer: 0
+  m_Name: handleflash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9037760228019046256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700522894787583636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1232246253098333322}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4843838467949015514
 GameObject:
   m_ObjectHideFlags: 0
