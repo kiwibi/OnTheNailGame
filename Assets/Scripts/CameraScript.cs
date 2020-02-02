@@ -47,7 +47,7 @@ public class CameraScript : MonoBehaviour
             GetComponent<Camera>().orthographicSize = zoom;
 
             //  Debug
-            //Debug.Log("Camera X: " + posX + " Camera Y: " + posY);
+            Debug.Log("Camera X: " + posX + " Camera Y: " + posY + " Camera zoom: " + zoom);
         }
     }
 
@@ -59,7 +59,6 @@ public class CameraScript : MonoBehaviour
             {
                 if (cameraList[0].UpdateCamera() == true)
                 {
-                    Debug.Log("Reached point");
                     SetCamera("flying", cameraList[0].GetStartPosition(), cameraList[0].GetEndPosition());
                 }
             }
@@ -140,6 +139,10 @@ public class CameraScript : MonoBehaviour
                 break;
 
             case CameraState.flyingaway:
+                cameraList[0].UpdateStartPosition(hammerPosition);
+                break;
+
+            case CameraState.swing:
                 cameraList[0].UpdateStartPosition(hammerPosition);
                 break;
         }
@@ -225,13 +228,12 @@ public class CameraScript : MonoBehaviour
             swingPosition = swingPos;
             hammerPosition = hammerPos;
             nailPosition = nailPos;
-            swingPosition = swingPos;
             zoom = Mathf.Lerp(minimumZoom, maximumZoom, Vector2.Distance(swingPos, nailPos) / zoomDivider);
         }
 
         public override Vector2 GetCameraPosition()
         {
-            return cameraPosition;
+            return flyingCamera.GetCameraPosition();
         }
 
         public override float GetZoom()
@@ -242,15 +244,13 @@ public class CameraScript : MonoBehaviour
         public override bool UpdateCamera()
         {
             flyingCamera.UpdateCamera();
-
-            cameraPosition = flyingCamera.GetCameraPosition();
             
             return false;
         }
 
         public override bool UpdateStartPosition(Vector2 startPos)
         {
-            hammerPosition = startPos;
+            flyingCamera.UpdateStartPosition(startPos);
 
             return true;
         }

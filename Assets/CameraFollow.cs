@@ -19,5 +19,7 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         camera.GetComponent<CameraScript>().SetHammerPosition(transform.position);
+
+        
     }
 }
