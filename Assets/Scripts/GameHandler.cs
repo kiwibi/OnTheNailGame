@@ -9,6 +9,8 @@ public class GameHandler : MonoBehaviour
 
     public GameObject textHandlerReference;
 
+    public GameObject audioManager;
+
     public static GameHandler instance;
 
     private Highscore highscore;
@@ -73,6 +75,7 @@ public class GameHandler : MonoBehaviour
     {
         highscore.NewScore();
         stageHandler.StartNewGame();
+        audioManager.GetComponent<AudioManager>().PlayMusic(1);
     }
 
     public int GetSwings()
