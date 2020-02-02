@@ -76,7 +76,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - Name: Bounce
     clip: {fileID: 8300000, guid: da47387b302cb7b43bd7a0bef7543532, type: 3}
-    volume: 0.27
+    volume: 0
     pitch: 1
     loop: 0
     source: {fileID: 0}
