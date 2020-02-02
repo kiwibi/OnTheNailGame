@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         // camera.GetComponent<CameraScript>().SetCamera("flyingaway",objectA.transform.position,transform.position,objectB.transform.position);
-        camera.GetComponent<CameraScript>().SetCamera("flying", transform.position, objectB.transform.position);
+        camera.GetComponent<CameraScript>().SetCamera("swing", objectA.transform.position, transform.position, objectB.transform.position);
     }
 
     // Update is called once per frame

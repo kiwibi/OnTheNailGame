@@ -9,6 +9,8 @@ public class GameHandler : MonoBehaviour
 
     public GameObject textHandlerReference;
 
+    public GameObject audioManager;
+
     public static GameHandler instance;
 
     private Highscore highscore;
@@ -56,9 +58,10 @@ public class GameHandler : MonoBehaviour
     {
         if (textHandler == null)
         {
-            if (stageHandler.GetStage() != "Main Menu")
+            if (stageHandler.GetStageName() != "Menu")
             {
                 textHandler = Instantiate(textHandlerReference, Vector3.zero, Quaternion.identity);
+                textHandler.GetComponent<TextHandler>().SetGameHandler(gameObject);
             }
         }
     }
@@ -72,6 +75,23 @@ public class GameHandler : MonoBehaviour
     {
         highscore.NewScore();
         stageHandler.StartNewGame();
+        audioManager.GetComponent<AudioManager>().PlayMusic(1);
+    }
+
+    public int GetSwings()
+    {
+        return highscore.GetCurrentScore().GetCurrentSwings();
+    }
+
+    public int GetPar()
+    {
+        Scene s = SceneManager.GetActiveScene();
+        return GetComponent<LevelPars>().GetPar(s.name);
+    }
+
+    public int GetStage()
+    {
+        return stageHandler.GetStageInt();
     }
 
     private class StageHandler
@@ -110,10 +130,15 @@ public class GameHandler : MonoBehaviour
             }
         }
 
-        public string GetStage()
+        public string GetStageName()
         {
             Scene currentS = SceneManager.GetActiveScene();
             return currentS.name;
+        }
+
+        public int GetStageInt()
+        {
+            return currentStage + 1;
         }
 
         public void StartNewGame()
@@ -121,11 +146,6 @@ public class GameHandler : MonoBehaviour
             currentStage = 0;
             SceneManager.LoadScene("Level 1");
         }
-    }
-
-    private class TextManager
-    {
-        
     }
 
     private class Score
@@ -173,7 +193,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    class Highscore
+    private class Highscore
     {
         private List<Score> scoreList;
         private Score currentScore;
