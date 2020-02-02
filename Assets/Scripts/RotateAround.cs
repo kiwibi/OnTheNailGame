@@ -32,6 +32,7 @@ public class RotateAround : MonoBehaviour
     public float wallArea_;
     [Tooltip("how far the swing gets pushed if inside wallArea_")]
     public float wallPushback_;
+    public float amountOfBounces_;
 
     [Header("VFX files")]
     public GameObject[] VFXFiles_;
@@ -45,6 +46,7 @@ public class RotateAround : MonoBehaviour
     private bool swinging_;
     private bool introScene_;
     private Quaternion startRotation_;
+    private float amountOfBounce_;
 
     void Start()
     {
@@ -61,6 +63,7 @@ public class RotateAround : MonoBehaviour
         introScene_ = true;
         startRotation_ = HammerBody_.transform.rotation;
         throttleReset_ = spinThrottle_;
+        amountOfBounce_ = amountOfBounces_;
 
     }
 
@@ -132,6 +135,7 @@ public class RotateAround : MonoBehaviour
     }
     void resetSwing()
     {
+        amountOfBounces_ = amountOfBounce_;
         swinging_ = true;
         transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
         HammerBody_.velocity = Vector3.zero;
@@ -184,6 +188,11 @@ public class RotateAround : MonoBehaviour
         {
             Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Play("Bounce");
+            if (amountOfBounces_ > 0)
+            {
+                amountOfBounces_--;
+                return;
+            }
             if (col_.gameObject.transform.tag != "Nail")
             {
 
@@ -202,12 +211,16 @@ public class RotateAround : MonoBehaviour
             {
                 //Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("Bounce");
-
+                if (amountOfBounces_ > 0)
+                {
+                    amountOfBounces_--;
+                    return;
+                }
                 if ((HammerBody_.velocity.x <= 0.4f && HammerBody_.velocity.y <= 0.4f))
                 {
                     
                     HammerBody_.velocity = new Vector2(0, 0);
-                    float dist = transform.position.x - Sling_.transform.position.x;
+                    float dist = Vector3.Distance(transform.position, Sling_.transform.position);
                     if (dist > 2 /*&& dist > 0*/|| dist < -2/* && dist < 0*/)
                     {
                         float yValue = col_.transform.position.y + 0.95f;
