@@ -274,4 +274,9 @@ public class RotateAround : MonoBehaviour
         }
         return newPos;
     }
+
+    public bool isSwinging()
+    {
+        return swinging_;
+    }
 }
