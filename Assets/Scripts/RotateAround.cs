@@ -47,6 +47,7 @@ public class RotateAround : MonoBehaviour
     private bool introScene_;
     private Quaternion startRotation_;
     private float amountOfBounce_;
+    private float bounceAcumelator_;
 
     void Start()
     {
@@ -64,7 +65,7 @@ public class RotateAround : MonoBehaviour
         startRotation_ = HammerBody_.transform.rotation;
         throttleReset_ = spinThrottle_;
         amountOfBounce_ = amountOfBounces_;
-
+        bounceAcumelator_ = 0;
     }
 
     // Update is called once per frame
@@ -79,6 +80,7 @@ public class RotateAround : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space))
             {
+                bounceAcumelator_ += 1 * Time.deltaTime;
                 resetSwing();
             }
         }
@@ -182,9 +184,20 @@ public class RotateAround : MonoBehaviour
         };
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (bounceAcumelator_ < 1)
+            bounceAcumelator_ += 1*Time.deltaTime;
+        else
+        {
+            resetSwing();
+            bounceAcumelator_ = 0;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D col_)
     {
-        Debug.Log(amountOfBounces_);
+        if (col_.gameObject.tag == "NoSpawn")
+            return;
         if (col_.otherCollider.bounciness == 0.5f)
         {
             Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
