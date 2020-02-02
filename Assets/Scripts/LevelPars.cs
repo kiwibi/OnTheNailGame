@@ -11,55 +11,39 @@ public class LevelPars : MonoBehaviour
         switch (levelName)
         {
             case "Level 1":
-                par = 10;
+                par = 2;
                 break;
 
             case "Level 2":
-                par = 10;
+                par = 2;
                 break;
 
             case "Level 3":
-                par = 10;
+                par = 3;
                 break;
 
             case "Level 4":
-                par = 10;
+                par = 3;
                 break;
 
             case "Level 5":
-                par = 10;
+                par = 2;
                 break;
 
             case "Level 6":
-                par = 10;
+                par = 3;
                 break;
 
             case "Level 7":
-                par = 10;
+                par = 4;
                 break;
 
             case "Level 8":
-                par = 10;
+                par = 4;
                 break;
 
             case "Level 9":
-                par = 10;
-                break;
-
-            case "Level 10":
-                par = 10;
-                break;
-
-            case "Level 11":
-                par = 10;
-                break;
-
-            case "Level 12":
-                par = 10;
-                break;
-
-            case "Level 13":
-                par = 10;
+                par = 5;
                 break;
 
             default:
