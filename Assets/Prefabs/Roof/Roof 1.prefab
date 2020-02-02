@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 158861448303830924}
   - component: {fileID: 158861448303830925}
   m_Layer: 0
-  m_Name: rooftop_0 (1)
-  m_TagString: Untagged
+  m_Name: Roof 1
+  m_TagString: NoSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
