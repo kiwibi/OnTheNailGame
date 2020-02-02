@@ -122,6 +122,7 @@ public class RotateAround : MonoBehaviour
                 releaseDirection_ *= -1;
                 HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
                 swinging_ = false;
+                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
             }
            // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
@@ -135,6 +136,7 @@ public class RotateAround : MonoBehaviour
                 releaseDirection_ = releaseDirection_ / magnitude;
                 HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
                 swinging_ = false;
+                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
             }
            // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
         }
