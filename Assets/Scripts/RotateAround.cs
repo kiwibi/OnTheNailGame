@@ -311,7 +311,7 @@ public class RotateAround : MonoBehaviour
                         }
                         break;
                 }
-                //GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>()
+                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().GoToScene("NextLevel");
             }
         }      
     }

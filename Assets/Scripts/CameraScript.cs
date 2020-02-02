@@ -14,6 +14,7 @@ public class CameraScript : MonoBehaviour
     private const float maximumZoom = 15;
     private const float minimumZoom = 1;
     private const float zoomDiv = 30;
+    private float cameraPointZoom = 0;
 
     enum CameraState { swing, nail, transition, flying, flyingaway };
     private CameraState cameraState;
@@ -41,6 +42,9 @@ public class CameraScript : MonoBehaviour
     void LateUpdate()
     {
         {
+            // Updates camera point zoom
+            cameraPointZoom = GameObject.FindGameObjectWithTag("CameraPoint").GetComponent<CameraPoint>().zoom;
+
             //  Updates the position variables
             UpdateCameraState();
 
@@ -70,14 +74,14 @@ public class CameraScript : MonoBehaviour
             {
                 if (cameraList[0].UpdateCamera() == true)
                 {
-                    SetCamera("transition", GameObject.FindGameObjectWithTag("Nail").transform.position, (GameObject.FindGameObjectWithTag("Hammer").transform.position + GameObject.FindGameObjectWithTag("Nail").transform.position) / 2);
+                    SetCamera("transition", GameObject.FindGameObjectWithTag("Nail").transform.position, (GameObject.FindGameObjectWithTag("CameraPoint").transform.position), transform.position);
                 }
             }
             else if (cameraState == CameraState.transition)
             {
                 if (cameraList[0].UpdateCamera() == true)
                 {
-                    SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.Find("Swingpoint").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
+                    //SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.Find("Swingpoint").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
                     GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().SetStartSequence(false);
                 }
             }
@@ -119,12 +123,6 @@ public class CameraScript : MonoBehaviour
                 cameraList.Clear();
                 cameraList.Add(new FlyingCamera(positionA, positionB));
                 break;
-
-            case "transition":
-                cameraState = CameraState.transition;
-                cameraList.Clear();
-                cameraList.Add(new TransitionCamera(positionA, positionB));
-                break;
         }
     }
 
@@ -145,6 +143,12 @@ public class CameraScript : MonoBehaviour
                     cameraList.Clear();
                     cameraList.Add(new FlyAwayCamera(positionA, positionB, positionC));
                 }
+                break;
+
+            case "transition":
+                cameraState = CameraState.transition;
+                cameraList.Clear();
+                cameraList.Add(new TransitionCamera(positionA, positionB, cameraPointZoom));
                 break;
         }
     }
@@ -214,7 +218,7 @@ public class CameraScript : MonoBehaviour
     {
         private Vector2 nailPosition;
         private const float zoom = minimumZoom;
-        private float timer = 1.5f;
+        private float timer = 2.5f;
 
         public NailCamera(Vector2 nailPos)
         {
@@ -351,11 +355,12 @@ public class CameraScript : MonoBehaviour
         private float zoom = minimumZoom;
         private const float startZoom = minimumZoom;
         private const float endZoom = maximumZoom;
+        private float pZoom;
         private float transitionState = 0;
         private float transitionLength = 0;
         private const float transitionDivider = 3;
 
-        public TransitionCamera(Vector2 startPos, Vector2 endPos)
+        public TransitionCamera(Vector2 startPos, Vector2 endPos, float pointZoom)
         {
             positionA = startPos;
             positionB = endPos;
@@ -363,6 +368,7 @@ public class CameraScript : MonoBehaviour
             transitionLength = distance / transitionDivider;
             cameraPosition = positionA;
             zoom = startZoom;
+            pZoom = pointZoom;
         }
 
         public override Vector2 GetCameraPosition()
@@ -386,7 +392,7 @@ public class CameraScript : MonoBehaviour
 
             cameraPosition = positionA + ((positionB - positionA) * (transitionState / transitionLength));
 
-            zoom = Mathf.Lerp(minimumZoom, maximumZoom, Vector2.Distance(positionA, cameraPosition) / zoomDiv);
+            zoom = Mathf.Lerp(startZoom, pZoom, Vector2.Distance(positionA, cameraPosition) / zoomDiv);
 
             return false;
         }
@@ -416,7 +422,7 @@ public class CameraScript : MonoBehaviour
         public FlyAwayCamera(Vector2 swingPos, Vector2 hammerPos, Vector2 nailPos)
         {
             flyingCamera = new FlyingCamera(hammerPos, nailPos);
-            transitionCamera = new TransitionCamera(swingPos, hammerPos);
+            transitionCamera = new TransitionCamera(swingPos, hammerPos, 0);
             cameraPosition = swingPos;
         }
 
