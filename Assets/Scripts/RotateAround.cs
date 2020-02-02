@@ -220,30 +220,14 @@ public class RotateAround : MonoBehaviour
             return;
         if (col_.otherCollider.bounciness == 0.5f)
         {
-            Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
+            //Instantiate(VFXFiles_[2], HandleFlash_.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Play("Bounce");
-            if (amountOfBounces_ > 0)
-            {
-                amountOfBounces_--;
-                return;
-            }
-            if (col_.gameObject.transform.tag != "Nail")
-            {
-
-                if((HammerBody_.velocity.x <= 0.4f && HammerBody_.velocity.y <= 0.4f))
-                {
-
-                    HammerBody_.velocity = new Vector2(0, 0);
-                    //resetSwing();
-                }
-                   
-            }
         }
         else
         {
             if (col_.gameObject.transform.tag != "Nail")
             {
-                //Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
+                Instantiate(VFXFiles_[2], HandleFlash_.position, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("Bounce");
                 if (amountOfBounces_ > 0)
                 {
@@ -281,6 +265,7 @@ public class RotateAround : MonoBehaviour
                             col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                            FindObjectOfType<AudioManager>().Play("Goodjob");
                         }
                         break;
                     case 90:     //right
@@ -290,6 +275,7 @@ public class RotateAround : MonoBehaviour
                             col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                            FindObjectOfType<AudioManager>().Play("Goodjob");
                         }
                         break;
                     case 180:     //bottom
@@ -299,6 +285,7 @@ public class RotateAround : MonoBehaviour
                             col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y + 0.26f, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                            FindObjectOfType<AudioManager>().Play("Goodjob");
                         }
                         break;
                     case 270:     //left
@@ -308,6 +295,7 @@ public class RotateAround : MonoBehaviour
                             col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
                            
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                            FindObjectOfType<AudioManager>().Play("Goodjob");
                         }
                         break;
                 }
