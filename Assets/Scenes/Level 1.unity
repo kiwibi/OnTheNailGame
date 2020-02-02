@@ -3878,6 +3878,11 @@ PrefabInstance:
       propertyPath: simulationSpeed
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 7517748356662847073, guid: 057c48b35730fbb4dad39e4d23944fb7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7517748356662847075, guid: 057c48b35730fbb4dad39e4d23944fb7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3886,7 +3891,7 @@ PrefabInstance:
     - target: {fileID: 7517748356662847075, guid: 057c48b35730fbb4dad39e4d23944fb7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.81
+      value: 4.81
       objectReference: {fileID: 0}
     - target: {fileID: 7517748356662847075, guid: 057c48b35730fbb4dad39e4d23944fb7,
         type: 3}
