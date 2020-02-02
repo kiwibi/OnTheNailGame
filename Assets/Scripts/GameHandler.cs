@@ -117,14 +117,16 @@ public class GameHandler : MonoBehaviour
             case "NextLevel":
                 if (SceneManager.GetActiveScene().name != "Menu")
                 {
+                    highscore.GetCurrentScore().StoreSwings();
+                    highscore.GetCurrentScore().AddPar(GetPar());
                     if (stageHandler.NextStage())
                     {
                         EndScreen();
-                        highscore.GetCurrentScore().StoreSwings();
+                        CheckToSpawnTextHandler();
+                        textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
                     }
                     else
                     {
-                        highscore.GetCurrentScore().StoreSwings();
                         CheckToSpawnTextHandler();
                     }
                 }
@@ -259,12 +261,24 @@ public class GameHandler : MonoBehaviour
         private int currentSwings;
         private int totalSwings;
         private string name;
+        private int totalPar;
 
         public Score()
         {
             currentSwings = 0;
             totalSwings = 0;
             name = "";
+            totalPar = 0;
+        }
+
+        public int GetParDifference()
+        {
+            return totalPar - totalSwings;
+        }
+
+        public void AddPar(int par)
+        {
+            totalPar += par;
         }
 
         public void AddSwing()
