@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 630934381}
   m_Layer: 0
   m_Name: Square 100x100 (2)
-  m_TagString: Geometry
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1426,6 +1426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Nail and Plank
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085192212101308823, guid: 2b9b87dea323e68488a74b44e2747a22,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5795759643429718341, guid: 2b9b87dea323e68488a74b44e2747a22,
         type: 3}
