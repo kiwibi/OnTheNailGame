@@ -95,8 +95,12 @@ public class GameHandler : MonoBehaviour
         {
             textHandler.GetComponent<TextHandler>().PlayTransition();
         }
+        else if (GameObject.FindGameObjectWithTag("Planks") != null)
+        {
+            GameObject.FindGameObjectWithTag("Planks").GetComponent<Animator>().SetTrigger("Start");
+        }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.8f);
 
         switch (sceneType)
         {
