@@ -11,8 +11,8 @@ public class CameraScript : MonoBehaviour
     private float posZ;
     private float zoom;
 
-    private const float maximumZoom = 20;
-    private const float minimumZoom = 5;
+    private const float maximumZoom = 12;
+    private const float minimumZoom = 1;
 
     enum CameraState { swing, nail, transition, flying, flyingaway };
     private CameraState cameraState;
@@ -217,7 +217,7 @@ public class CameraScript : MonoBehaviour
         private Vector2 nailPosition;
         private Vector2 cameraPosition;
         private float zoom;
-        private float zoomDivider = 10;
+        private float zoomDivider = 30;
 
         public SwingCamera(Vector2 swingPos, Vector2 hammerPos, Vector2 nailPos)
         {
@@ -262,7 +262,7 @@ public class CameraScript : MonoBehaviour
         private Vector2 positionA;
         private Vector2 positionB;
         private float zoom;
-        private const float zoomDivider = 10;
+        private const float zoomDivider = 30;
         private const float maxZoom = maximumZoom;
         private const float minZoom = minimumZoom;
 
