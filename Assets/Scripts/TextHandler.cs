@@ -11,6 +11,14 @@ public class TextHandler : MonoBehaviour
 
     private GameObject gameHandler;
 
+    public GameObject transition;
+    private Animator transitionAnimator;
+
+    private void Awake()
+    {
+        transitionAnimator = Instantiate(transition, transform.Find("Canvas").transform).GetComponent<Animator>();
+    }
+
     void Start()
     {
         swingText.text = 0.ToString();
@@ -28,5 +36,10 @@ public class TextHandler : MonoBehaviour
     public void SetGameHandler(GameObject GH)
     {
         gameHandler = GH;
+    }
+
+    public void PlayTransition()
+    {
+        transitionAnimator.SetTrigger("Start");
     }
 }
