@@ -11,22 +11,22 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Daniel Scene.unity
     guid: d4f4b5d19e9440847bbb19e12c6921a7
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: f28a4bd76477c67439303aa4c85e4969
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: 03151f10c5a0f624c8bb22ea227c9270
   - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: d0405f32930278c4ea9509d26c6e1249
+  - enabled: 1
+    path: Assets/Scenes/Level 4.unity
+    guid: 991afde5cdb0d2046a541b1eac327460
+  - enabled: 1
+    path: Assets/Scenes/Level 5.unity
+    guid: 186e7b06eb8b61246ba20381b2e76381
+  - enabled: 1
+    path: Assets/Scenes/Level 6.unity
+    guid: 321f66c83b4be7a44acbdbe144984948
   m_configObjects: {}
