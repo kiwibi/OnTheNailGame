@@ -94,13 +94,15 @@ public class GameHandler : MonoBehaviour
         if (textHandler != null)
         {
             textHandler.GetComponent<TextHandler>().PlayTransition();
+            audioManager.GetComponent<AudioManager>().Play("Transition");
         }
         else if (GameObject.FindGameObjectWithTag("Planks") != null)
         {
             GameObject.FindGameObjectWithTag("Planks").GetComponent<Animator>().SetTrigger("Start");
+            audioManager.GetComponent<AudioManager>().Play("Transition");
         }
 
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(2f);
 
         switch (sceneType)
         {

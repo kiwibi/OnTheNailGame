@@ -12,6 +12,7 @@ TagManager:
   - GameHandler
   - Planks
   - NoSpawn
+  - AudioManager
   layers:
   - Default
   - TransparentFX

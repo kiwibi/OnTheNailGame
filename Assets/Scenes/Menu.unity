@@ -715,6 +715,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842370588}
   m_CullTransparentMesh: 0
+--- !u!1 &847221634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2504580500690339013, guid: dc69ae3937d9a914796d2a63249a7cfe,
+    type: 3}
+  m_PrefabInstance: {fileID: 50494406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &847221636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847221634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06133305b15db7a4bb44589f43747b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &968656494
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,11 +981,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1394232188990120150, guid: adacda5ae54cb0a46b9e682f60773d06,
-        type: 3}
-      propertyPath: Sounds.Array.data[4].loop
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1394232188990120151, guid: adacda5ae54cb0a46b9e682f60773d06,
         type: 3}
