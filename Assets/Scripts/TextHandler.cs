@@ -29,7 +29,7 @@ public class TextHandler : MonoBehaviour
         parText.text = 0.ToString();
         stageNumber.text = 0.ToString();
         endPar.text = "";
-        endPar.enabled = false;
+        Debug.Log("Text spawned");
     }
 
     void Update()
@@ -44,25 +44,26 @@ public class TextHandler : MonoBehaviour
 
     public void SetEndScreen(int par)
     {
+        Debug.Log("ENd");
         endText = true;
-        endPar.enabled = true;
 
-        swingText.enabled = false;
-        parText.enabled = false;
-        stageNumber.enabled = false;
+        swingText.text = "";
+        parText.text = "";
+        stageNumber.text = "";
 
         if (par == 0)
         {
-            parText.text = "You were on par! Well done!";
+            endPar.text = "You were on par! Well done!";
         }
         else if (par < 0)
         {
-            parText.text = "You were " + par + " under par! You're amazing!";
+            endPar.text = "You were " + Mathf.Abs(par) + " under par! You're amazing!";
         }
         else
         {
-            parText.text = "You were " + par + " over par! Better luck next time!";
+            endPar.text = "You were " + Mathf.Abs(par) + " over par! Better luck next time!";
         }
+        Debug.Log(endPar.text);
     }
 
     public void SetGameHandler(GameObject GH)

@@ -44,6 +44,11 @@ public class GameHandler : MonoBehaviour
     {
         CheckToSpawnTextHandler();
 
+        if (SceneManager.GetActiveScene().name == "EndScreen")
+        {
+            textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
+        }
+
         if (Input.GetKeyDown(KeyCode.N))
         {
             GoToScene("StartGame");
@@ -76,7 +81,12 @@ public class GameHandler : MonoBehaviour
     {
         if (textHandler == null)
         {
-            if (stageHandler.GetStageName() != "Menu")
+            if (stageHandler.GetStageName() == "EndScreen")
+            {
+                textHandler = Instantiate(textHandlerReference, Vector3.zero, Quaternion.identity);
+                textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
+            }
+            else if (stageHandler.GetStageName() != "Menu")
             {
                 textHandler = Instantiate(textHandlerReference, Vector3.zero, Quaternion.identity);
                 textHandler.GetComponent<TextHandler>().SetGameHandler(gameObject);
@@ -123,7 +133,6 @@ public class GameHandler : MonoBehaviour
                     {
                         EndScreen();
                         CheckToSpawnTextHandler();
-                        textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
                     }
                     else
                     {
@@ -273,7 +282,7 @@ public class GameHandler : MonoBehaviour
 
         public int GetParDifference()
         {
-            return totalPar - totalSwings;
+            return totalSwings - totalPar;
         }
 
         public void AddPar(int par)
