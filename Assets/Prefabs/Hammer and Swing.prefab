@@ -245,7 +245,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hammer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1232246253098333320, guid: 66e2b78f53afb77419bc4dc071b7e95e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 66e2b78f53afb77419bc4dc071b7e95e, type: 3}
 --- !u!4 &8557603264766432641 stripped
 Transform:
