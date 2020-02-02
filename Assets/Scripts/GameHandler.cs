@@ -44,6 +44,11 @@ public class GameHandler : MonoBehaviour
     {
         CheckToSpawnTextHandler();
 
+        if (SceneManager.GetActiveScene().name == "EndScreen")
+        {
+            textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
+        }
+
         if (Input.GetKeyDown(KeyCode.N))
         {
             GoToScene("StartGame");
@@ -76,7 +81,12 @@ public class GameHandler : MonoBehaviour
     {
         if (textHandler == null)
         {
-            if (stageHandler.GetStageName() != "Menu")
+            if (stageHandler.GetStageName() == "EndScreen")
+            {
+                textHandler = Instantiate(textHandlerReference, Vector3.zero, Quaternion.identity);
+                textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
+            }
+            else if (stageHandler.GetStageName() != "Menu")
             {
                 textHandler = Instantiate(textHandlerReference, Vector3.zero, Quaternion.identity);
                 textHandler.GetComponent<TextHandler>().SetGameHandler(gameObject);
@@ -117,14 +127,15 @@ public class GameHandler : MonoBehaviour
             case "NextLevel":
                 if (SceneManager.GetActiveScene().name != "Menu")
                 {
+                    highscore.GetCurrentScore().StoreSwings();
+                    highscore.GetCurrentScore().AddPar(GetPar());
                     if (stageHandler.NextStage())
                     {
                         EndScreen();
-                        highscore.GetCurrentScore().StoreSwings();
+                        CheckToSpawnTextHandler();
                     }
                     else
                     {
-                        highscore.GetCurrentScore().StoreSwings();
                         CheckToSpawnTextHandler();
                     }
                 }
@@ -259,12 +270,24 @@ public class GameHandler : MonoBehaviour
         private int currentSwings;
         private int totalSwings;
         private string name;
+        private int totalPar;
 
         public Score()
         {
             currentSwings = 0;
             totalSwings = 0;
             name = "";
+            totalPar = 0;
+        }
+
+        public int GetParDifference()
+        {
+            return totalSwings - totalPar;
+        }
+
+        public void AddPar(int par)
+        {
+            totalPar += par;
         }
 
         public void AddSwing()
