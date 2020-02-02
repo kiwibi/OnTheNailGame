@@ -82,7 +82,7 @@ public class CameraScript : MonoBehaviour
                 if (cameraList[0].UpdateCamera() == true)
                 {
                     //SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.Find("Swingpoint").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
-                    //GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().SetStartSequence(false);
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().SetStartSequence(false);
                 }
             }
             else
