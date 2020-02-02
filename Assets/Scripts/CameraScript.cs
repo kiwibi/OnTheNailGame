@@ -11,7 +11,7 @@ public class CameraScript : MonoBehaviour
     private float posZ;
     private float zoom;
 
-    private const float maximumZoom = 12;
+    private const float maximumZoom = 15;
     private const float minimumZoom = 1;
     private const float zoomDiv = 30;
 
