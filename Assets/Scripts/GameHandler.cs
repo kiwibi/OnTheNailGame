@@ -62,13 +62,16 @@ public class GameHandler : MonoBehaviour
         //    CheckToSpawnTextHandler();
         //}
 
-        if (startSequence)
+        if (GameObject.FindGameObjectWithTag("Hammer") != null)
         {
-            GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(false);
-        }
-        else
-        {
-            GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(true);
+            if (startSequence)
+            {
+                GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(false);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(true);
+            }
         }
     }
 
