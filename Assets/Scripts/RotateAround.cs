@@ -69,6 +69,7 @@ public class RotateAround : MonoBehaviour
     {
         if (introScene_)
         {
+  
             Rotate();
 
             HammerState(swinging_);
@@ -185,12 +186,12 @@ public class RotateAround : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Bounce");
             if (col_.gameObject.transform.tag != "Nail")
             {
-                  
-                if (orbitSpeed_ > 0)
-                    orbitSpeed_ -= collisionSpeedDecrease_;
-                else
+
+                if((HammerBody_.velocity.x <= 0.4f && HammerBody_.velocity.y <= 0.4f))
                 {
-                    orbitSpeed_ = 0;
+
+                    HammerBody_.velocity = new Vector2(0, 0);
+                    resetSwing();
                 }
                    
             }
@@ -201,15 +202,23 @@ public class RotateAround : MonoBehaviour
             {
                 //Instantiate(VFXFiles_[1], HandleFlash_.position, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("Bounce");
-                if (orbitSpeed_ > 0)
-                    orbitSpeed_ -= collisionSpeedDecrease_;
-                else
+
+                if ((HammerBody_.velocity.x <= 0.4f && HammerBody_.velocity.y <= 0.4f))
                 {
-                    orbitSpeed_ = 0;
+                    
+                    HammerBody_.velocity = new Vector2(0, 0);
                     float dist = transform.position.x - Sling_.transform.position.x;
                     if (dist > 2 /*&& dist > 0*/|| dist < -2/* && dist < 0*/)
                     {
-                        Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, Sling_.transform.position.y, Sling_.transform.position.z));
+                        float yValue = col_.transform.position.y + 0.95f;
+                        if (col_.transform.tag == "Geometry")
+                        {
+                            Debug.Log(":)");
+                            yValue = col_.collider.bounds.min.y + 0.75f;
+                        }
+                           
+                        Debug.Log(yValue);
+                        Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, yValue, Sling_.transform.position.z));
                         Sling_.transform.position = distance;
                     }
                     resetSwing();
@@ -268,14 +277,19 @@ public class RotateAround : MonoBehaviour
         walls_ = GameObject.FindGameObjectsWithTag("Geometry");
         foreach(GameObject wall in walls_)
         {
-            distance = newPos.x - wall.transform.position.x;
-            if (distance > -wallArea_ && distance < 0)
+            Collider2D wallColl_ = wall.GetComponent<Collider2D>();
+            if (wallColl_.bounds.max.y > newPos.y && wallColl_.bounds.min.y < newPos.y)
             {
-                newPos.x = wall.transform.position.x - wallPushback_;
-            }
-            else if (distance < wallArea_ && distance > 0)
-            {
-                newPos.x = wall.transform.position.x + wallPushback_;
+                
+                distance = newPos.x - wall.transform.position.x;
+                if (distance > -wallArea_ && distance < 0)
+                {
+                    newPos.x = wall.transform.position.x - wallPushback_;
+                }
+                else if (distance < wallArea_ && distance > 0)
+                {
+                    newPos.x = wall.transform.position.x + wallPushback_;
+                }
             }
             
         }
