@@ -43,6 +43,7 @@ public class RotateAround : MonoBehaviour
     private Vector3 releaseDirection_;
     private float gravityScale_;
     private bool swinging_;
+    private bool introScene_;
     private Quaternion startRotation_;
 
     void Start()
@@ -57,6 +58,7 @@ public class RotateAround : MonoBehaviour
         HammerBody_.gravityScale = 0;
         HammerBody_.angularVelocity = 0;
         swinging_ = true;
+        introScene_ = false;
         startRotation_ = HammerBody_.transform.rotation;
         throttleReset_ = spinThrottle_;
 
@@ -65,13 +67,16 @@ public class RotateAround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rotate();
-
-        HammerState(swinging_);
-
-        if(Input.GetKey(KeyCode.Space))
+        if (introScene_)
         {
-            resetSwing();
+            Rotate();
+
+            HammerState(swinging_);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                resetSwing();
+            }
         }
     }
 
@@ -278,5 +283,10 @@ public class RotateAround : MonoBehaviour
     public bool isSwinging()
     {
         return swinging_;
+    }
+
+    public void setIntroSwing(bool isItPlaying)
+    {
+        introScene_ = isItPlaying;
     }
 }
