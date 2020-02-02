@@ -231,7 +231,7 @@ public class RotateAround : MonoBehaviour
             {
                 Instantiate(VFXFiles_[2], HandleFlash_.position, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("Bounce");
-                if (amountOfBounces_ > 0)
+                if (amountOfBounces_ > 0 && swinging_ == false)
                 {
                     amountOfBounces_--;
        
