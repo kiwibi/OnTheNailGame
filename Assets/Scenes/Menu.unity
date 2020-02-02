@@ -326,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 1737517295486237974, guid: c968966b4a1a5ad45bb3dc41c9af0b87,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1737517295486237974, guid: c968966b4a1a5ad45bb3dc41c9af0b87,
         type: 3}
@@ -343,6 +343,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2588241626133720749, guid: c968966b4a1a5ad45bb3dc41c9af0b87,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1277449375}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c968966b4a1a5ad45bb3dc41c9af0b87, type: 3}
 --- !u!1 &385657231
@@ -1083,6 +1088,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185541200}
   m_CullTransparentMesh: 0
+--- !u!1 &1277449375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1394232188990120151, guid: adacda5ae54cb0a46b9e682f60773d06,
+    type: 3}
+  m_PrefabInstance: {fileID: 1014225034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1307588416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,6 +1904,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1307588418}
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 542896036}
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
