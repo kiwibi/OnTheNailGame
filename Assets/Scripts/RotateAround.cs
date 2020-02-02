@@ -266,8 +266,7 @@ public class RotateAround : MonoBehaviour
         foreach(GameObject wall in walls_)
         {
             distance = newPos.x - wall.transform.position.x;
-            Debug.Log(distance);
-            if (distance > -wallArea_ && distance < 0)
+            if (distance < -wallArea_ && distance < 0)
             {
                 newPos.x -= wallPushback_;
             }
