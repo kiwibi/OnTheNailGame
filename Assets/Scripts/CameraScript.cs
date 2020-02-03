@@ -15,6 +15,7 @@ public class CameraScript : MonoBehaviour
     private const float minimumZoom = 1;
     private const float zoomDiv = 30;
     private float cameraPointZoom = 0;
+    private bool setStartSequence;
 
     enum CameraState { swing, nail, transition, flying, flyingaway };
     private CameraState cameraState;
@@ -37,6 +38,9 @@ public class CameraScript : MonoBehaviour
 
         //  Initializes first camera
         SetCamera("nail", GameObject.FindGameObjectWithTag("Nail").transform.position);
+
+        //  Sets start sequence
+        setStartSequence = false;
     }
 
     void LateUpdate()
@@ -79,10 +83,11 @@ public class CameraScript : MonoBehaviour
             }
             else if (cameraState == CameraState.transition)
             {
-                if (cameraList[0].UpdateCamera() == true)
+                if (cameraList[0].UpdateCamera() == true && setStartSequence == false)
                 {
                     //SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.Find("Swingpoint").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
                     GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().SetStartSequence(false);
+                    setStartSequence = true;
                 }
             }
             else
