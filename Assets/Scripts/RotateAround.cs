@@ -38,6 +38,7 @@ public class RotateAround : MonoBehaviour
     [Header("VFX files")]
     public GameObject[] VFXFiles_;
 
+    private bool sent_;
     private float orbit_; //radian degree toward the center object
     private float speedReset_;
     private float throttleReset_;
@@ -68,6 +69,7 @@ public class RotateAround : MonoBehaviour
         throttleReset_ = spinThrottle_;
         amountOfBounce_ = amountOfBounces_;
         bounceAcumelator_ = 0;
+        sent_ = false;
     }
 
     // Update is called once per frame
@@ -301,7 +303,12 @@ public class RotateAround : MonoBehaviour
                         }
                         break;
                 }
-                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().GoToScene("NextLevel");
+                if(sent_ == false)
+                {
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().GoToScene("NextLevel");
+                    sent_ = true;
+                }
+                
             }
         }      
     }
