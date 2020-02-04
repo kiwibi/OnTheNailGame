@@ -29,7 +29,6 @@ public class TextHandler : MonoBehaviour
         parText.text = 0.ToString();
         stageNumber.text = 0.ToString();
         endPar.text = "";
-        Debug.Log("Text spawned");
     }
 
     void Update()
@@ -44,7 +43,6 @@ public class TextHandler : MonoBehaviour
 
     public void SetEndScreen(int par)
     {
-        Debug.Log("ENd");
         endText = true;
 
         swingText.text = "";
@@ -63,7 +61,6 @@ public class TextHandler : MonoBehaviour
         {
             endPar.text = "You were " + Mathf.Abs(par) + " over par! Better luck next time!";
         }
-        Debug.Log(endPar.text);
     }
 
     public void SetGameHandler(GameObject GH)

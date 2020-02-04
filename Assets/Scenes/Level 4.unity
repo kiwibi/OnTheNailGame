@@ -2151,27 +2151,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &577801361 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8557603264766432669, guid: fa920878cd0522f49a94b34f326ee478,
-    type: 3}
-  m_PrefabInstance: {fileID: 7483689161211923043}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &577801368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577801361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c2941384112804d81396f3b5abbf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 806043907}
-  objectA: {fileID: 112066559}
-  objectB: {fileID: 944235710}
 --- !u!1001 &585356328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3836,12 +3815,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &944235710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6433756238143498846, guid: 2b9b87dea323e68488a74b44e2747a22,
-    type: 3}
-  m_PrefabInstance: {fileID: 8711937480204037990}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &967660438
 GameObject:
   m_ObjectHideFlags: 0
@@ -8128,6 +8101,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8557603264766432643, guid: fa920878cd0522f49a94b34f326ee478, type: 3}
     - {fileID: 2886903971851743393, guid: fa920878cd0522f49a94b34f326ee478, type: 3}
+    - {fileID: 6090365632156734318, guid: fa920878cd0522f49a94b34f326ee478, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fa920878cd0522f49a94b34f326ee478, type: 3}
 --- !u!1001 &8711937480204037990
 PrefabInstance:
