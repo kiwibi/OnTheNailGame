@@ -18,6 +18,7 @@ public class GameHandler : MonoBehaviour
     private GameObject textHandler;
 
     private bool startSequence;
+    private bool transitioning;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class GameHandler : MonoBehaviour
         highscore = new Highscore();
         textHandler = null;
         startSequence = false;
+        transitioning = false;
     }
 
     private void Update()
@@ -47,6 +49,13 @@ public class GameHandler : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "EndScreen")
         {
             textHandler.GetComponent<TextHandler>().SetEndScreen(highscore.GetCurrentScore().GetParDifference());
+        }
+        else if (SceneManager.GetActiveScene().name == "EndScreen")
+        {
+            stageHandler = new StageHandler(numberOfStages);
+            highscore = new Highscore();
+            textHandler = null;
+            startSequence = false;
         }
 
         if (Input.GetKeyDown(KeyCode.N))
@@ -69,10 +78,12 @@ public class GameHandler : MonoBehaviour
             if (startSequence)
             {
                 GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(false);
+                transitioning = true;
             }
             else
             {
                 GameObject.FindGameObjectWithTag("Hammer").GetComponent<RotateAround>().setIntroSwing(true);
+                transitioning = false;
             }
         }
     }
@@ -101,6 +112,9 @@ public class GameHandler : MonoBehaviour
 
     private IEnumerator SceneTransition(string sceneType)
     {
+        startSequence = true;
+        transitioning = true;
+
         if (textHandler != null)
         {
             textHandler.GetComponent<TextHandler>().PlayTransition();
@@ -125,25 +139,31 @@ public class GameHandler : MonoBehaviour
                 break;
 
             case "NextLevel":
-                if (SceneManager.GetActiveScene().name != "Menu")
-                {
-                    highscore.GetCurrentScore().StoreSwings();
-                    highscore.GetCurrentScore().AddPar(GetPar());
-                    if (stageHandler.NextStage())
-                    {
-                        EndScreen();
-                        CheckToSpawnTextHandler();
-                    }
-                    else
-                    {
-                        CheckToSpawnTextHandler();
-                    }
-                }
+                NextLevel();
                 break;
 
             case "StartGame":
                 NewGame();
                 break;
+        }
+    }
+
+    private void NextLevel()
+    {
+        if (SceneManager.GetActiveScene().name != "Menu")
+        {
+            highscore.GetCurrentScore().StoreSwings();
+            highscore.GetCurrentScore().AddPar(GetPar());
+            if (stageHandler.NextStage())
+            {
+                EndScreen();
+                CheckToSpawnTextHandler();
+            }
+            else
+            {
+                CheckToSpawnTextHandler();
+                startSequence = true;
+            }
         }
     }
 
@@ -180,7 +200,10 @@ public class GameHandler : MonoBehaviour
 
     public void AddSwing()
     {
-        highscore.GetCurrentScore().AddSwing();
+        if (!transitioning)
+        {
+            highscore.GetCurrentScore().AddSwing();
+        }
     }
 
     public int GetSwings()
