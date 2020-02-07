@@ -103,7 +103,7 @@ public class RotateAround : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("The swosh");
 
             if (orbitSpeed_ < orbitSpeedCap_)
-                orbitSpeed_ += speedIncrease_;
+                orbitSpeed_ += speedIncrease_ * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.RightArrow) && swinging_ == true)
         {
@@ -115,7 +115,7 @@ public class RotateAround : MonoBehaviour
             if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
                 FindObjectOfType<AudioManager>().Play("The swosh");
             if (orbitSpeed_ < orbitSpeedCap_)
-                orbitSpeed_ += speedIncrease_;
+                orbitSpeed_ += speedIncrease_ * Time.deltaTime;
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
         {
@@ -178,8 +178,8 @@ public class RotateAround : MonoBehaviour
         if (free)
         {
 
-            transform.Rotate(new Vector3(0, 0, 1), orbit_* orbitSpeed_ / spinThrottle_);
-            spinThrottle_ -= spinSpeedDecrease_;
+            transform.Rotate(new Vector3(0, 0, 1), orbit_* orbitSpeed_ / spinThrottle_ * Time.deltaTime);
+            spinThrottle_ -= spinSpeedDecrease_ * Time.deltaTime;
         }
         else
         {
