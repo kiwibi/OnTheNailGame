@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OrbitPoint_: {fileID: 0}
   orbitDistance_: 0.7
-  speedIncrease_: 0.24
+  speedIncrease_: 5
   orbitSpeed_: 58
   orbitSpeedCap_: 400
   yeetSpeedCap_: 99
