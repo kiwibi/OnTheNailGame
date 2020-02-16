@@ -51,6 +51,8 @@ public class RotateAround : MonoBehaviour
     private float amountOfBounce_;
     private float bounceAcumelator_;
     private float yeetNumber_;
+    private Vector3 nextSlingPos_;
+    private Vector3 oldPos_;
 
     void Start()
     {
@@ -58,6 +60,8 @@ public class RotateAround : MonoBehaviour
         HandleFlash_ = gameObject.transform.GetChild(0);
         Sling_ = GameObject.FindGameObjectWithTag("Swing");
         tempPos_ = new Vector3(0, 0, 0);
+        nextSlingPos_ = Sling_.transform.position;
+        oldPos_ = transform.position;
         speedReset_ = orbitSpeed_;
         orbit_ = (Mathf.PI / 2) * 3;
         gravityScale_ = HammerBody_.gravityScale;
@@ -87,6 +91,27 @@ public class RotateAround : MonoBehaviour
                 bounceAcumelator_ += 1 * Time.deltaTime;
                 resetSwing();
             }
+            if (swinging_ == false && HammerStuck())
+            {
+                Sling_.transform.position = nextSlingPos_;
+                HammerBody_.velocity = new Vector2(0, 0);
+                oldPos_ = transform.position;
+                resetSwing();
+            }
+        }
+    }
+
+    bool HammerStuck()
+    {
+        if(bounceAcumelator_ > 0.3f)
+        {
+            oldPos_ = transform.position;
+            bounceAcumelator_ = 0;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -161,8 +186,9 @@ public class RotateAround : MonoBehaviour
     }
     void resetSwing()
     {
-        amountOfBounces_ = amountOfBounce_;
         swinging_ = true;
+        amountOfBounces_ = amountOfBounce_;
+
         transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
         HammerBody_.velocity = Vector3.zero;
         HammerBody_.transform.rotation = startRotation_;
@@ -210,12 +236,9 @@ public class RotateAround : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (bounceAcumelator_ < 2)
-            bounceAcumelator_ += 1*Time.deltaTime;
-        else
+        if(collision.gameObject.tag == "Untagged")
         {
-            resetSwing();
-            bounceAcumelator_ = 0;
+            bounceAcumelator_ += 1 * Time.deltaTime;
         }
     }
     private void OnCollisionEnter2D(Collision2D col_)
@@ -233,29 +256,22 @@ public class RotateAround : MonoBehaviour
             {
                 Instantiate(VFXFiles_[2], HandleFlash_.position, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("Bounce");
-                if (amountOfBounces_ > 0 && swinging_ == false)
-                {
-                    amountOfBounces_--;
-       
-                }
-                if (amountOfBounces_ == 0)
-                {
-                    
-                    HammerBody_.velocity = new Vector2(0, 0);
-                    float dist = Vector3.Distance(transform.position, Sling_.transform.position);
-                    if (dist > 1.5f /*&& dist > 0*/|| dist < -1.5f/* && dist < 0*/)
-                    {
-                        float yValue = col_.transform.position.y + 0.95f;
-                        if (col_.transform.tag == "Geometry")
-                        {
-                            yValue = col_.collider.bounds.min.y + 0.75f;
-                        }
-                           
-                        Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, yValue, Sling_.transform.position.z));
-                        Sling_.transform.position = distance;
-                    }
-                    resetSwing();
-                }
+                //HammerBody_.velocity = new Vector2(0, 0);
+                float dist = Vector3.Distance(transform.position, Sling_.transform.position);
+                moveSling(dist, col_);
+                //if (amountOfBounces_ > 0 && swinging_ == false)
+                //{
+                //    amountOfBounces_--;
+
+                //}
+                //if (amountOfBounces_ == 0)
+                //{
+
+                //    HammerBody_.velocity = new Vector2(0, 0);
+                //    float dist = Vector3.Distance(transform.position, Sling_.transform.position);
+                //    moveSling(dist, col_);
+                //    //resetSwing();
+                //}
             }
             else
             {
@@ -338,6 +354,20 @@ public class RotateAround : MonoBehaviour
         return newPos;
     }
 
+    void moveSling(float distance_, Collision2D col_)
+    {
+        if (distance_ > 1.5f /*&& dist > 0*/|| distance_ < -1.5f/* && dist < 0*/)
+        {
+            float yValue = col_.transform.position.y + 0.95f;
+            if (col_.transform.tag == "Geometry")
+            {
+                yValue = col_.collider.bounds.min.y + 0.75f;
+            }
+
+            Vector3 distance = CheckWallDistance(new Vector3(col_.otherCollider.transform.position.x, yValue, Sling_.transform.position.z));
+            nextSlingPos_ = distance;
+        }
+    }
     public bool isSwinging()
     {
         return swinging_;
