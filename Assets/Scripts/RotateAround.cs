@@ -88,7 +88,6 @@ public class RotateAround : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space))
             {
-                bounceAcumelator_ += 1 * Time.deltaTime;
                 resetSwing();
             }
             if (swinging_ == false && HammerStuck())
@@ -103,10 +102,8 @@ public class RotateAround : MonoBehaviour
 
     bool HammerStuck()
     {
-        if(bounceAcumelator_ > 0.3f)
+        if(oldPos_ == transform.position)
         {
-            oldPos_ = transform.position;
-            bounceAcumelator_ = 0;
             return true;
         }
         else
@@ -188,6 +185,7 @@ public class RotateAround : MonoBehaviour
     {
         swinging_ = true;
         amountOfBounces_ = amountOfBounce_;
+        bounceAcumelator_ = 0;
 
         transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
         HammerBody_.velocity = Vector3.zero;
@@ -240,12 +238,17 @@ public class RotateAround : MonoBehaviour
         {
             bounceAcumelator_ += 1 * Time.deltaTime;
         }
+        if(bounceAcumelator_ > 0.2f)
+        {
+            oldPos_ = transform.position;
+            bounceAcumelator_ = 0;
+        }
     }
     private void OnCollisionEnter2D(Collision2D col_)
     {
         if (col_.gameObject.tag == "NoSpawn")
             return;
-        if (col_.otherCollider.bounciness == 0.5f)
+        if (col_.otherCollider.bounciness == 0.6f)
         {
             //Instantiate(VFXFiles_[2], HandleFlash_.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Play("Bounce");
@@ -259,19 +262,6 @@ public class RotateAround : MonoBehaviour
                 //HammerBody_.velocity = new Vector2(0, 0);
                 float dist = Vector3.Distance(transform.position, Sling_.transform.position);
                 moveSling(dist, col_);
-                //if (amountOfBounces_ > 0 && swinging_ == false)
-                //{
-                //    amountOfBounces_--;
-
-                //}
-                //if (amountOfBounces_ == 0)
-                //{
-
-                //    HammerBody_.velocity = new Vector2(0, 0);
-                //    float dist = Vector3.Distance(transform.position, Sling_.transform.position);
-                //    moveSling(dist, col_);
-                //    //resetSwing();
-                //}
             }
             else
             {
