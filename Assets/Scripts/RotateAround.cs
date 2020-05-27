@@ -81,7 +81,7 @@ public class RotateAround : MonoBehaviour
     {
         if (introScene_)
         {
-  
+
             Rotate();
 
             HammerState(swinging_);
@@ -93,7 +93,6 @@ public class RotateAround : MonoBehaviour
             if (swinging_ == false && HammerStuck())
             {
                 Sling_.transform.position = nextSlingPos_;
-                HammerBody_.velocity = new Vector2(0, 0);
                 oldPos_ = transform.position;
                 resetSwing();
             }
@@ -102,7 +101,7 @@ public class RotateAround : MonoBehaviour
 
     bool HammerStuck()
     {
-        if(oldPos_ == transform.position)
+        if (oldPos_ == transform.position)
         {
             return true;
         }
@@ -114,81 +113,155 @@ public class RotateAround : MonoBehaviour
 
     void Rotate()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) && swinging_ == true)
+        if (Application.platform == RuntimePlatform.Android)
         {
-            orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
-            tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
-            tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
-            tempPos_.z = transform.position.z;
-            transform.position = tempPos_;
-            if(transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
-                FindObjectOfType<AudioManager>().Play("The swosh");
-
-            if (orbitSpeed_ < orbitSpeedCap_)
-                orbitSpeed_ += speedIncrease_ * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow) && swinging_ == true)
-        {
-            orbit_ += orbitSpeed_ * Time.deltaTime / 10;
-            tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
-            tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
-            tempPos_.z = transform.position.z;
-            transform.position = tempPos_;
-            if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
-                FindObjectOfType<AudioManager>().Play("The swosh");
-            if (orbitSpeed_ < orbitSpeedCap_)
-                orbitSpeed_ += speedIncrease_ * Time.deltaTime;
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
-        {
-            if (HammerBody_.velocity == Vector2.zero)
+            int i = 0;
+            //right
+            if (Input.GetTouch(i).position.x > Screen.width / 2 && swinging_ == true) //right
             {
-                yeetNumber_ = Random.Range(0, 100);
-
-                if(yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
-                    FindObjectOfType<AudioManager>().Play("ThrowYeet");
-                else
-                    FindObjectOfType<AudioManager>().Play("Throw");
-                //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
-                releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
-                float magnitude = releaseDirection_.magnitude;
-                releaseDirection_ = releaseDirection_ / magnitude;
-                releaseDirection_ *= -1;
-                HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
-                swinging_ = false;
-                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                orbit_ += orbitSpeed_ * Time.deltaTime / 10;
+                tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
+                tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+                tempPos_.z = transform.position.z;
+                transform.position = tempPos_;
+                if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                    FindObjectOfType<AudioManager>().Play("The swosh");
+                if (orbitSpeed_ < orbitSpeedCap_)
+                    orbitSpeed_ += speedIncrease_ * Time.deltaTime;
             }
-           // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            if (HammerBody_.velocity == Vector2.zero)
+            if (Input.GetTouch(i).phase == TouchPhase.Ended && Input.GetTouch(i).position.x > Screen.width / 2) // right release
             {
-                yeetNumber_ = Random.Range(0, 100);
+                if (HammerBody_.velocity == Vector2.zero)
+                {
+                    yeetNumber_ = Random.Range(0, 100);
 
-                if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
-                    FindObjectOfType<AudioManager>().Play("ThrowYeet");
-                else
-                    FindObjectOfType<AudioManager>().Play("Throw");
-                //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
-                releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
-                float magnitude = releaseDirection_.magnitude;
-                releaseDirection_ = releaseDirection_ / magnitude;
-                HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
-                swinging_ = false;
-                GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                    if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                        FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                    else
+                        FindObjectOfType<AudioManager>().Play("Throw");
+                    //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+                    releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
+                    float magnitude = releaseDirection_.magnitude;
+                    releaseDirection_ = releaseDirection_ / magnitude;
+                    releaseDirection_ *= -1;
+                    HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
+                    swinging_ = false;
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                }
             }
-           // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
+            //left
+            if (Input.GetTouch(i).position.x < Screen.width / 2 && swinging_ == true) //left
+            {
+                orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
+                tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
+                tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+                tempPos_.z = transform.position.z;
+                transform.position = tempPos_;
+                if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                    FindObjectOfType<AudioManager>().Play("The swosh");
+
+                if (orbitSpeed_ < orbitSpeedCap_)
+                    orbitSpeed_ += speedIncrease_ * Time.deltaTime;
+            }
+            if (Input.GetTouch(i).phase == TouchPhase.Ended && Input.GetTouch(i).position.x < Screen.width / 2) //left release
+            {
+                if (HammerBody_.velocity == Vector2.zero)
+                {
+                    yeetNumber_ = Random.Range(0, 100);
+
+                    if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                        FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                    else
+                        FindObjectOfType<AudioManager>().Play("Throw");
+                    //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+                    releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
+                    float magnitude = releaseDirection_.magnitude;
+                    releaseDirection_ = releaseDirection_ / magnitude;
+                    HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
+                    swinging_ = false;
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                }
+            }
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+
+            if (Input.GetKey(KeyCode.LeftArrow) && swinging_ == true)
+            {
+                orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
+                tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
+                tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+                tempPos_.z = transform.position.z;
+                transform.position = tempPos_;
+                if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                    FindObjectOfType<AudioManager>().Play("The swosh");
+
+                if (orbitSpeed_ < orbitSpeedCap_)
+                    orbitSpeed_ += speedIncrease_ * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow) && swinging_ == true)
+            {
+                orbit_ += orbitSpeed_ * Time.deltaTime / 10;
+                tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
+                tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
+                tempPos_.z = transform.position.z;
+                transform.position = tempPos_;
+                if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 175)
+                    FindObjectOfType<AudioManager>().Play("The swosh");
+                if (orbitSpeed_ < orbitSpeedCap_)
+                    orbitSpeed_ += speedIncrease_ * Time.deltaTime;
+            }
+            else if (Input.GetKeyUp(KeyCode.RightArrow))//Yeet that hammer
+            {
+                if (HammerBody_.velocity == Vector2.zero)
+                {
+                    yeetNumber_ = Random.Range(0, 100);
+
+                    if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                        FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                    else
+                        FindObjectOfType<AudioManager>().Play("Throw");
+                    //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+                    releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
+                    float magnitude = releaseDirection_.magnitude;
+                    releaseDirection_ = releaseDirection_ / magnitude;
+                    releaseDirection_ *= -1;
+                    HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
+                    swinging_ = false;
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                }
+                // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                if (HammerBody_.velocity == Vector2.zero)
+                {
+                    yeetNumber_ = Random.Range(0, 100);
+
+                    if (yeetSpeedCap_ < orbitSpeed_ && yeetNumber_ <= 10)
+                        FindObjectOfType<AudioManager>().Play("ThrowYeet");
+                    else
+                        FindObjectOfType<AudioManager>().Play("Throw");
+                    //releaseDirection_ = calculateTan(OrbitPoint_.transform.position, HammerBody_.transform.position);
+                    releaseDirection_ = Vector2.Perpendicular(OrbitPoint_.transform.position - HammerBody_.transform.position);
+                    float magnitude = releaseDirection_.magnitude;
+                    releaseDirection_ = releaseDirection_ / magnitude;
+                    HammerBody_.AddForce(releaseDirection_ * forceMultiplier_ * orbitSpeed_);
+                    swinging_ = false;
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().AddSwing();
+                }
+                // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("flyingaway", GameObject.FindGameObjectWithTag("Swing").transform.position, GameObject.FindGameObjectWithTag("Hammer").transform.position, GameObject.FindGameObjectWithTag("Nail").transform.position);
+            }
         }
     }
     void resetSwing()
     {
+        HammerBody_.velocity = new Vector2(0, 0);
         swinging_ = true;
         amountOfBounces_ = amountOfBounce_;
         bounceAcumelator_ = 0;
 
         transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
-        HammerBody_.velocity = Vector3.zero;
         HammerBody_.transform.rotation = startRotation_;
         HammerBody_.angularVelocity = 0;
         orbit_ = (Mathf.PI / 2) * 3;
