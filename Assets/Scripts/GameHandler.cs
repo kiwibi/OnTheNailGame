@@ -35,6 +35,7 @@ public class GameHandler : MonoBehaviour
 
     void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
         stageHandler = new StageHandler(numberOfStages);
         highscore = new Highscore();
         textHandler = null;
