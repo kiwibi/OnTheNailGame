@@ -160,6 +160,26 @@ PrefabInstance:
       propertyPath: OrbitPoint_
       value: 
       objectReference: {fileID: 5775082862534807127}
+    - target: {fileID: 1232246253098333321, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: orbitSpeed_
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232246253098333321, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: speedIncrease_
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232246253098333321, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: forceMultiplier_
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232246253098333321, guid: 66e2b78f53afb77419bc4dc071b7e95e,
+        type: 3}
+      propertyPath: spinThrottle_
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1232246253098333322, guid: 66e2b78f53afb77419bc4dc071b7e95e,
         type: 3}
       propertyPath: m_LocalPosition.x
