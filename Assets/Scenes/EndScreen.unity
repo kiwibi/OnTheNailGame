@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get Nailin'!
+  m_Text: Back To Menu
 --- !u!222 &224385238
 CanvasRenderer:
   m_ObjectHideFlags: 0
