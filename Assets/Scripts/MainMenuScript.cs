@@ -8,4 +8,9 @@ public class MainMenuScript : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().GoToScene("StartGame");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
