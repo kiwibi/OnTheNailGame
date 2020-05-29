@@ -92,9 +92,22 @@ public class RotateAround : MonoBehaviour
             }
             if (swinging_ == false && HammerStuck())
             {
+                swinging_ = true;
+                HammerState(swinging_);
                 Sling_.transform.position = nextSlingPos_;
-                oldPos_ = transform.position;
-                resetSwing();
+                //oldPos_ = transform.position;
+                HammerBody_.velocity = new Vector2(0, 0);
+
+                amountOfBounces_ = amountOfBounce_;
+                bounceAcumelator_ = 0;
+
+                transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
+                HammerBody_.transform.rotation = startRotation_;
+                HammerBody_.angularVelocity = 0;
+                orbit_ = (Mathf.PI / 2) * 3;
+                orbitSpeed_ = speedReset_;
+                spinThrottle_ = throttleReset_;
+ 
             }
         }
     }
@@ -256,8 +269,11 @@ public class RotateAround : MonoBehaviour
     }
     void resetSwing()
     {
-        HammerBody_.velocity = new Vector2(0, 0);
+
         swinging_ = true;
+        HammerState(swinging_);
+        HammerBody_.velocity = new Vector2(0, 0);
+        
         amountOfBounces_ = amountOfBounce_;
         bounceAcumelator_ = 0;
 
