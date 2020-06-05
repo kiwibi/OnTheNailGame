@@ -92,22 +92,8 @@ public class RotateAround : MonoBehaviour
             }
             if (swinging_ == false && HammerStuck())
             {
-                swinging_ = true;
-                HammerState(swinging_);
                 Sling_.transform.position = nextSlingPos_;
-                //oldPos_ = transform.position;
-                HammerBody_.velocity = new Vector2(0, 0);
-
-                amountOfBounces_ = amountOfBounce_;
-                bounceAcumelator_ = 0;
-
-                transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
-                HammerBody_.transform.rotation = startRotation_;
-                HammerBody_.angularVelocity = 0;
-                orbit_ = (Mathf.PI / 2) * 3;
-                orbitSpeed_ = speedReset_;
-                spinThrottle_ = throttleReset_;
- 
+                resetSwing();               
             }
         }
     }
@@ -126,12 +112,13 @@ public class RotateAround : MonoBehaviour
 
     void Rotate()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android && Input.touchCount > 0)
         {
             int i = 0;
             //right
             if (Input.GetTouch(i).position.x > Screen.width / 2 && swinging_ == true) //right
             {
+                HammerBody_.isKinematic = false;
                 orbit_ += orbitSpeed_ * Time.deltaTime / 10;
                 tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
                 tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
@@ -165,6 +152,7 @@ public class RotateAround : MonoBehaviour
             //left
             if (Input.GetTouch(i).position.x < Screen.width / 2 && swinging_ == true) //left
             {
+                HammerBody_.isKinematic = false;
                 orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
                 tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
                 tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
@@ -201,6 +189,7 @@ public class RotateAround : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftArrow) && swinging_ == true)
             {
+                HammerBody_.isKinematic = false;
                 orbit_ -= orbitSpeed_ * Time.deltaTime / 10;
                 tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
                 tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
@@ -214,6 +203,7 @@ public class RotateAround : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.RightArrow) && swinging_ == true)
             {
+                HammerBody_.isKinematic = false;
                 orbit_ += orbitSpeed_ * Time.deltaTime / 10;
                 tempPos_.x = OrbitPoint_.transform.position.x + Mathf.Cos(orbit_) * orbitDistance_;
                 tempPos_.y = OrbitPoint_.transform.position.y + Mathf.Sin(orbit_) * orbitDistance_;
@@ -269,21 +259,24 @@ public class RotateAround : MonoBehaviour
     }
     void resetSwing()
     {
-
+        HammerBody_.velocity = new Vector3(0, 0, 0);
+        HammerBody_.isKinematic = true;
+        HammerBody_.angularVelocity = 0;
         swinging_ = true;
         HammerState(swinging_);
-        HammerBody_.velocity = new Vector2(0, 0);
-        
+        Sling_.transform.position = nextSlingPos_;
+        oldPos_ = transform.position;
+
         amountOfBounces_ = amountOfBounce_;
-        bounceAcumelator_ = 0;
+        //bounceAcumelator_ = 0;
 
         transform.position = new Vector3(OrbitPoint_.transform.position.x, OrbitPoint_.transform.position.y - orbitDistance_, transform.position.z);
         HammerBody_.transform.rotation = startRotation_;
-        HammerBody_.angularVelocity = 0;
+
         orbit_ = (Mathf.PI / 2) * 3;
         orbitSpeed_ = speedReset_;
         spinThrottle_ = throttleReset_;
-       // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
+        // GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>().SetCamera("swing", GameObject.FindGameObjectWithTag("Swing").transform.position);
     }
 
     void RotateSprite(bool free)
