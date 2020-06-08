@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1394232188990120151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1394232188990120149}
+  - component: {fileID: 1394232188990120150}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: AudioManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1394232188990120149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394232188990120151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1394232188990120150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394232188990120151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55c34495a086c244b8580418eccddbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Theme
+    clip: {fileID: 8300000, guid: 87d8d057ef611fa4a827bc9d605e2576, type: 3}
+    volume: 0.358
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - Name: The swosh
+    clip: {fileID: 8300000, guid: cf1e2e5ad3309304391e2917898649b8, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Throw
+    clip: {fileID: 8300000, guid: 9441983e5fe0689408648ad6b949a334, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: ThrowYeet
+    clip: {fileID: 8300000, guid: ab50a10c32f8ede49ae1c6b36aa4e4f8, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: MenuTheme
+    clip: {fileID: 8300000, guid: f81699aa7801e584b96924ba5ff3c10f, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - Name: Bounce
+    clip: {fileID: 8300000, guid: da47387b302cb7b43bd7a0bef7543532, type: 3}
+    volume: 0
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: NailHit
+    clip: {fileID: 8300000, guid: d2c2cc8d2959deb439ca25a5cda24aa2, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Goodjob
+    clip: {fileID: 8300000, guid: 4e99b60de3bdb1e4aa1f716146a5ba7e, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Button
+    clip: {fileID: 8300000, guid: 0ac3eba7d5246fc43aacd61ebcdda88e, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - Name: Transition
+    clip: {fileID: 8300000, guid: ff44c48a99e19e44e87508beca6bb9a7, type: 3}
+    volume: 0.27
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
