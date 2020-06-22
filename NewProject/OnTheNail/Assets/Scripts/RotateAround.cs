@@ -353,7 +353,7 @@ public class RotateAround : MonoBehaviour
                     case 0:     //top
                         if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
                         {
-                            Instantiate(VFXFiles_[0], col_.transform);
+                            //Instantiate(VFXFiles_[0], col_.transform);
                             col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y - 0.26f, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -363,7 +363,7 @@ public class RotateAround : MonoBehaviour
                     case 90:     //right
                         if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
                         {
-                            Instantiate(VFXFiles_[0], col_.transform);
+                            //Instantiate(VFXFiles_[0], col_.transform);
                             col_.transform.position = new Vector3(col_.transform.position.x + 0.26f, col_.transform.position.y, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -373,7 +373,7 @@ public class RotateAround : MonoBehaviour
                     case 180:     //bottom
                         if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
                         {
-                            Instantiate(VFXFiles_[0], col_.transform);
+                            //Instantiate(VFXFiles_[0], col_.transform);
                             col_.transform.position = new Vector3(col_.transform.position.x, col_.transform.position.y + 0.26f, col_.transform.position.z);
                             
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -383,7 +383,7 @@ public class RotateAround : MonoBehaviour
                     case 270:     //left
                         if (col_.gameObject.GetComponent<Rigidbody2D>().bodyType != RigidbodyType2D.Static)
                         {
-                            Instantiate(VFXFiles_[0], col_.transform);
+                            //Instantiate(VFXFiles_[0], col_.transform);
                             col_.transform.position = new Vector3(col_.transform.position.x - 0.26f, col_.transform.position.y, col_.transform.position.z);
                            
                             col_.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
